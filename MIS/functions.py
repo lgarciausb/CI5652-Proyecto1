@@ -44,6 +44,9 @@ def timeout(time, func, *args):
     except TimeoutException:
         print("---- {funcName} -> Max Time ({time} s) Exceeded".format(funcName = func.__name__, time = time))
         return set(), time
+    except Exception as e:
+        print("---- {funcName} -> Something went wrong: {error}".format(funcName = func.__name__,, error = e))
+        return set(), time
     else:
         # Reset the alarm
         signal.alarm(0)
