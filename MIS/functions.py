@@ -20,6 +20,10 @@ def timeout_handler(signum, frame):   # Custom signal handler
 
 signal.signal(signal.SIGALRM, timeout_handler)
 
+#funcion que recibe una funcion y una serie de argumentos correspondientes 
+# a esa funcion, y calcula el tiempo de ejecucion de dicha funcion.
+# retorna el resultado de la funcion y el tiempo de ejecucion
+
 
 def timer(func, *args):
     start = time.time()
@@ -27,18 +31,25 @@ def timer(func, *args):
     duration = time.time() - start
     return result, duration
 
-def timeout(graph, time, funcName, func, *args):
+#funcion que recibe un enetero time, una funcion func, y una serie de argumentos *args
+#que ejecuta func con *args como argumentos con un maximo limite de tiempo de ejecucion time segundos.
+#Si func finalizó antes del maximo tiempo de ejecución retorna la respuesta, de lo contrario
+#retorna un conjunto vacío. Retorna en todo caso el tiempo de ejecución
+
+
+def timeout(time, func, *args):
     signal.alarm(time)
     try:
         res, duration = timer(func, *args)
     except TimeoutException:
-        print("---- {funcName} -> Max Time ({time} s) Exceeded".format(funcName = funcName, time = time))
+        print("---- {funcName} -> Max Time ({time} s) Exceeded".format(funcName = func.__name__, time = time))
         return set(), time
     else:
         # Reset the alarm
         signal.alarm(0)
-        print_test_result(funcName, res, is_MIS(
-            graph, res), duration)
+        #print results
+        print("---- {funcName} -> MIS size: {misSize} MIS: {mis} isMIS: {isMIS} -> Execution time: {duration}".format(
+        funcName=func.__name__, misSize=len(res), mis=res, isMIS=is_MIS(args[0], res), duration=duration))
         
         return res, duration
 
@@ -53,19 +64,7 @@ def is_MIS(G, S):
             return False
     return True
 
-# funcion que recibe dos enteros n y e, y retorna un Grafo
-# con n nodos y e lados
-
-
-def randomGraph(n, e):
-    G = rx.PyGraph()
-    for i in range(n):
-        G.add_node(0)
-    for i in range(e):
-        G.add_edge(randint(0, n-1), randint(0, n-1), None)
-
-    return G
-
+#funcion que carga un grafo definido en un archivo de texto
 
 def load_graph(filename):
     G = rx.PyGraph()
@@ -84,13 +83,15 @@ def load_graph(filename):
 
     return G
 
+#funcion que corre un benchmark sobre tres funciones, una solucion exacta a MIS,
+#una heuristica para MIS, y una busqueda local de un MIS.
+#carga varios archivos de grafos y corre dichas funciones sobre cada grafo, 
+#reportando por consola el resultado y tiempo de ejecucion de cada funcion.
+#recibe un entero time que determina el maximo tiempo de ejecucion para
+#las funciones
 
-def print_test_result(funcName, mis, isMis, duration):
-    print("---- {funcName} -> MIS size: {misSize} MIS: {mis} isMIS: {isMIS} -> Execution time: {duration}".format(
-        funcName=funcName, misSize=len(mis), mis=mis, isMIS=isMis, duration=duration))
 
-
-def test_benchmark():
+def test_benchmark(time):
     dirname = "benchmark"
     filenames = next(walk(dirname), (None, None, []))[2]
 
@@ -105,8 +106,8 @@ def test_benchmark():
         print("GRAPH -> nodes: {nodesNumber} edges {edgesNumber}".format(
             nodesNumber=graph.num_nodes(), edgesNumber=graph.num_edges()))
         
-        exactRes, exactDuration = timeout(graph, 60 * 20, "MIS_exact", MIS_exact, graph)
-        heuristicRes, heuristicDuration = timeout(graph, 60 * 20, "MIS_heuristic", MIS_heuristic, graph)
-        localSearchRes, localSearchDuration = timeout(graph, 60 * 20, "MIS_local_search", MIS_local_search, graph, heuristicRes, len(heuristicRes) - 1)
+        exactRes, exactDuration = timeout(time, MIS_exact, graph)
+        heuristicRes, heuristicDuration = timeout(time, MIS_heuristic, graph)
+        localSearchRes, localSearchDuration = timeout(time, MIS_local_search, graph, heuristicRes, len(heuristicRes) - 1)
         
         print("\n-----------------------")
