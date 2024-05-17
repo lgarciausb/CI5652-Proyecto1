@@ -34,6 +34,9 @@ def timeout(graph, time, funcName, func, *args):
     except TimeoutException:
         print("---- {funcName} -> Max Time ({time} s) Exceeded".format(funcName = funcName, time = time))
         return set(), time
+    except Exception as e:
+        print("---- {funcName} -> Something went wrong: {error}".format(funcName = funcName, error = e))
+        return set(), time
     else:
         # Reset the alarm
         signal.alarm(0)
@@ -105,8 +108,8 @@ def test_benchmark():
         print("GRAPH -> nodes: {nodesNumber} edges {edgesNumber}".format(
             nodesNumber=graph.num_nodes(), edgesNumber=graph.num_edges()))
         
-        exactRes, exactDuration = timeout(graph, 60 * 20, "MIS_exact", MIS_exact, graph)
-        heuristicRes, heuristicDuration = timeout(graph, 60 * 20, "MIS_heuristic", MIS_heuristic, graph)
-        localSearchRes, localSearchDuration = timeout(graph, 60 * 20, "MIS_local_search", MIS_local_search, graph, heuristicRes, len(heuristicRes) - 1)
+        exactRes, exactDuration = timeout(graph, 60 * 60, "MIS_exact", MIS_exact, graph)
+        heuristicRes, heuristicDuration = timeout(graph, 60 * 60, "MIS_heuristic", MIS_heuristic, graph)
+        localSearchRes, localSearchDuration = timeout(graph, 60 * 60, "MIS_local_search", MIS_local_search, graph, heuristicRes, len(heuristicRes) - 1)
         
         print("\n-----------------------")
