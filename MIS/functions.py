@@ -62,6 +62,8 @@ def timeout(time, func, *args):
 
 
 def is_MIS(G, S):
+    for node in S:
+        if any((neighbor in S) for neighbor in G.neighbors(node)): return False
     for node in G.node_indices():
         if node not in S and not any((neighbor in S) for neighbor in G.neighbors(node)):
             return False
