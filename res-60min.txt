@@ -196,13 +196,6 @@ GRAPH -> nodes: 1500 edges 284923
 ---- MIS_local_search -> Max Time (3600 s) Exceeded
 
 -----------------------
-FILE ->  p_hat1500-3.clq.txt
-GRAPH -> nodes: 1500 edges 847244
----- MIS_exact -> Max Time (3600 s) Exceeded
----- MIS_heuristic -> MIS size: 7 MIS: [811, 1367, 559, 399, 838, 1178, 1] isMIS: True -> Execution time: 0.10214593432861456
----- MIS_local_search -> Max Time (3600 s) Exceeded
-
------------------------
 FILE ->  hamming10-4.clq.txt
 GRAPH -> nodes: 1024 edges 434176
 ---- MIS_exact -> Max Time (3600 s) Exceeded

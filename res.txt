@@ -157,6 +157,13 @@ GRAPH -> nodes: 378 edges 70551
 ---- MIS_heuristic -> MIS size: 2 MIS: [1, 28] isMIS: True -> Execution time: 0.005955696105957031
 ---- MIS_local_search -> MIS size: 3 MIS: [27, 28, 29] isMIS: True -> Execution time: 0.09365057945251465
 
+-----------------------
+FILE ->  MANN_a45.clq.txt
+GRAPH -> nodes: 1035 edges 533115
+---- MIS_exact -> Something went wrong: maximum recursion depth exceeded while calling a Python object
+---- MIS_heuristic -> MIS size: 2 MIS: [1, 55] isMIS: True -> Execution time: 0.10945661323649522
+---- MIS_local_search -> MIS size: 3 MIS: [56, 54, 55] isMIS: True -> Execution time: 2.566702154145634
+
 FILE ->  p_hat1500-1.clq.txt
 GRAPH -> nodes: 1500 edges 284923
 ---- MIS_exact -> Max Time (1800 s) Exceeded
