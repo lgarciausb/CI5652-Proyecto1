@@ -1,0 +1,29 @@
+---------TESTS---------
+NAME ->  CUBICAL
+GRAPH -> nodes: 8 edges 12
+---- MIS_exact -> MIS size: 4 MIS: [1, 3, 4, 6] isMIS: True -> Execution time: 0.00014638900756835938
+---- MIS_heuristic -> MIS size: 4 MIS: [1, 3, 4, 6] isMIS: True -> Execution time: 2.2172927856445312e-05
+---- MIS_local_search -> MIS size: 4 MIS: [1, 3, 4, 6] isMIS: True -> Execution time: 0.00012183189392089844
+
+-----------------------
+NAME ->  K3
+GRAPH -> nodes: 6 edges 7
+---- MIS_exact -> MIS size: 3 MIS: [0, 2, 5] isMIS: True -> Execution time: 6.818771362304688e-05
+---- MIS_heuristic -> MIS size: 2 MIS: [5, 1] isMIS: True -> Execution time: 1.3589859008789062e-05
+---- MIS_local_search -> MIS size: 3 MIS: [0, 2, 5] isMIS: True -> Execution time: 6.961822509765625e-05
+
+-----------------------
+NAME ->  P3
+GRAPH -> nodes: 3 edges 2
+---- MIS_exact -> MIS size: 2 MIS: [0, 2] isMIS: True -> Execution time: 1.2636184692382812e-05
+---- MIS_heuristic -> MIS size: 1 MIS: [1] isMIS: True -> Execution time: 7.3909759521484375e-06
+---- MIS_local_search -> MIS size: 1 MIS: [1] isMIS: True -> Execution time: 7.62939453125e-06
+
+-----------------------
+NAME ->  SQUARE_TRIANGLE
+GRAPH -> nodes: 6 edges 7
+---- MIS_exact -> MIS size: 3 MIS: [0, 3, 4] isMIS: True -> Execution time: 4.9591064453125e-05
+---- MIS_heuristic -> MIS size: 2 MIS: [4, 1] isMIS: True -> Execution time: 1.0967254638671875e-05
+---- MIS_local_search -> MIS size: 3 MIS: [0, 3, 4] isMIS: True -> Execution time: 4.482269287109375e-05
+
+-----------------------
