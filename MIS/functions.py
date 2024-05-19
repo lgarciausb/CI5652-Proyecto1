@@ -20,24 +20,30 @@ def timeout_handler(signum, frame):   # Custom signal handler
 
 signal.signal(signal.SIGALRM, timeout_handler)
 
-#funcion que recibe una funcion y una serie de argumentos correspondientes 
-# a esa funcion, y calcula el tiempo de ejecucion de dicha funcion.
-# retorna el resultado de la funcion y el tiempo de ejecucion
-
-
 def timer(func, *args):
+    """
+    Funcion que calcula el tiempo de ejecucion de otra
+
+    :param func: funcion a ejecutar
+    :param *args: argumentos de func
+    :return: Retorna el resultado de la funcion y el tiempo de ejecucion
+    """ 
     start = time.time()
     result = func(*args)
     duration = time.time() - start
     return result, duration
 
-#funcion que recibe un enetero time, una funcion func, y una serie de argumentos *args
-#que ejecuta func con *args como argumentos con un maximo limite de tiempo de ejecucion time segundos.
-#Si func finalizó antes del maximo tiempo de ejecución retorna la respuesta, de lo contrario
-#retorna un conjunto vacío. Retorna en todo caso el tiempo de ejecución
-
-
 def timeout(time, func, *args):
+    """
+    Funcion que dada otra funcion de calculo de MIS determina si se excedio a un limite de tiempo dado o tuvo otro error
+
+    :param G: grafo dado
+    :param time: timepo limite
+    :param funcName: nombre de la funcion a ejecutar
+    :param func: funcion a ejecutar
+    :param *args: argumentos de func
+    :return: Si func finalizó antes del maximo tiempo de ejecución retorna la respuesta, de lo contrario retorna un conjunto vacío. Retorna en todo caso el tiempo de ejecución
+    """ 
     signal.alarm(time)
     try:
         res, duration = timer(func, *args)
@@ -56,12 +62,14 @@ def timeout(time, func, *args):
         
         return res, duration
 
-
-# funcion que recibe un grafo G y un conjunto S de indices de nodos y determina si
-# S es un conjunto independiente maximal
-
-
 def is_MIS(G, S):
+    """
+    Funcion que recibe un grafo G y un conjunto S de indices de nodos y determina si S es un conjunto independiente maximal
+
+    :param G: grafo dado
+    :param S: posible conjunto independiente maximal de G
+    :return: true si S es MIS para G, false si no
+    """ 
     for node in S:
         if any((neighbor in S) for neighbor in G.neighbors(node)): return False
     for node in G.node_indices():
@@ -69,9 +77,30 @@ def is_MIS(G, S):
             return False
     return True
 
-#funcion que carga un grafo definido en un archivo de texto
+def randomGraph(n, e):
+    """
+    Funcion que recibe dos enteros n y e, y retorna un Grafo con n nodos y e lados
+
+    :param n: numero de nodos
+    :param e: numero de edges
+    :return: grafo random con n nodos y e lados
+    """ 
+    G = rx.PyGraph()
+    for i in range(n):
+        G.add_node(0)
+    for i in range(e):
+        G.add_edge(randint(0, n-1), randint(0, n-1), None)
+
+    return G
+
 
 def load_graph(filename):
+    """
+    Funcion que carga un grafo en formato DIMACS dado el nombre de un archivo
+
+    :param filename: nombre/path del archivo
+    :return: grafo cargado
+    """ 
     G = rx.PyGraph()
 
     with open(filename) as f:
@@ -88,15 +117,24 @@ def load_graph(filename):
 
     return G
 
-#funcion que corre un benchmark sobre tres funciones, una solucion exacta a MIS,
-#una heuristica para MIS, y una busqueda local de un MIS.
-#carga varios archivos de grafos y corre dichas funciones sobre cada grafo, 
-#reportando por consola el resultado y tiempo de ejecucion de cada funcion.
-#recibe un entero time que determina el maximo tiempo de ejecucion para
-#las funciones
+
+def print_test_result(funcName, mis, isMis, duration):
+    """
+    Funcion que dada otra funcion de calculo de MIS determina si se excedio a un limite de tiempo dado o tuvo otro error
+
+    :param funcName: nombre de la funcion a ejecutar
+    :param mis: posible conjunto independiente maximal
+    :param isMis: booleano que indica si mis es realmente maximal
+    :paran duration: tiempo (en segundos) que toma en ejecutarse funcName
+    """ 
+    print("---- {funcName} -> MIS size: {misSize} MIS: {mis} isMIS: {isMIS} -> Execution time: {duration}".format(
+        funcName=funcName, misSize=len(mis), mis=mis, isMIS=isMis, duration=duration))
 
 
 def test_benchmark(time):
+    """
+    Funcion para testear todos los files del benchmark
+    """ 
     dirname = "benchmark"
     filenames = next(walk(dirname), (None, None, []))[2]
 

@@ -1,9 +1,13 @@
 from random import randint
 import rustworkx as rx
 
-# funcion que recibe un grafo G y retorna un conjunto de
-# indices del grafo que conforman un conjunto independiente maximal
 def MIS_heuristic(G):
+    """
+    Solucion heuristica para encontrar el conjunto maximo independiente de un grafo G.
+
+    :param G: grafo G
+    :return: indices del grafo que conforman un conjunto independiente maximal
+    """ 
 
     S = []
 
