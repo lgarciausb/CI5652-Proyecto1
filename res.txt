@@ -1,0 +1,220 @@
+FILE ->  brock200_2.clq.txt
+GRAPH -> nodes: 200 edges 9876
+---- MIS_exact -> MIS size: 11 MIS: [33, 39, 85, 89, 116, 136, 139, 150, 154, 168, 187] isMIS: True -> Execution time: 346.917941570282
+---- MIS_heuristic -> MIS size: 8 MIS: [139, 192, 187, 122, 39, 1, 136, 115] isMIS: True -> Execution time: 0.001010894775390625
+---- MIS_local_search -> MIS size: 11 MIS: [33, 39, 136, 168, 139, 116, 85, 150, 89, 154, 187] isMIS: True -> Execution time: 6.724896192550659
+
+-----------------------
+FILE ->  brock200_4.clq.txt
+GRAPH -> nodes: 200 edges 13089
+---- MIS_exact -> MIS size: 8 MIS: [26, 111, 132, 135, 146, 150, 163, 172] isMIS: True -> Execution time: 9.251050472259521
+---- MIS_heuristic -> MIS size: 6 MIS: [135, 170, 115, 143, 161, 1] isMIS: True -> Execution time: 0.0014138221740722656
+---- MIS_local_search -> MIS size: 8 MIS: [163, 132, 135, 172, 111, 146, 150, 26] isMIS: True -> Execution time: 0.49794459342956543
+
+-----------------------
+FILE ->  brock400_2.clq.txt
+GRAPH -> nodes: 400 edges 59786
+---- MIS_exact -> MIS size: 8 MIS: [65, 111, 177, 187, 210, 214, 222, 397] isMIS: True -> Execution time: 168.13994812965393
+---- MIS_heuristic -> MIS size: 5 MIS: [292, 387, 397, 1, 135] isMIS: True -> Execution time: 0.006285190582275391
+---- MIS_local_search -> MIS size: 6 MIS: [342, 135, 361, 203, 279, 377] isMIS: True -> Execution time: 2.8189260959625244
+
+-----------------------
+FILE ->  brock400_4.clq.txt
+GRAPH -> nodes: 400 edges 59765
+---- MIS_exact -> MIS size: 7 MIS: [243, 271, 277, 280, 298, 304, 317] isMIS: True -> Execution time: 173.3566415309906
+---- MIS_heuristic -> MIS size: 6 MIS: [239, 280, 395, 277, 321, 1] isMIS: True -> Execution time: 0.005662679672241211
+---- MIS_local_search -> MIS size: 7 MIS: [385, 347, 69, 262, 56, 395, 271] isMIS: True -> Execution time: 4.697396993637085
+
+-----------------------
+FILE ->  brock800_2.clq.txt
+GRAPH -> nodes: 800 edges 208166
+---- MIS_exact -> Max Time (3600 s) Exceeded
+---- MIS_heuristic -> MIS size: 7 MIS: [444, 737, 1, 425, 267, 578, 579] isMIS: True -> Execution time: 0.016974210739135742
+---- MIS_local_search -> MIS size: 9 MIS: [1, 385, 770, 579, 682, 586, 718, 692, 405] isMIS: True -> Execution time: 2135.4206495285034
+
+FILE ->  brock800_4.clq.txt
+GRAPH -> nodes: 800 edges 207643
+---- MIS_exact -> Max Time (1800 s) Exceeded
+---- MIS_heuristic -> MIS size: 7 MIS: [345, 104, 741, 335, 119, 1, 161] isMIS: True -> Execution time: 0.03705573081970215
+---- MIS_local_search -> Max Time (1800 s) Exceeded
+
+-----------------------
+FILE ->  C1000.9.clq.txt
+GRAPH -> nodes: 1000 edges 450079
+---- MIS_exact -> Something went wrong: maximum recursion depth exceeded while calling a Python object
+---- MIS_heuristic -> MIS size: 4 MIS: [403, 618, 1, 385] isMIS: True -> Execution time: 0.43317294120788574
+---- MIS_local_search -> MIS size: 5 MIS: [1, 929, 389, 935, 506] isMIS: True -> Execution time: 9.320945262908936
+
+-----------------------
+FILE ->  C125.9.clq.txt
+GRAPH -> nodes: 125 edges 6963
+---- MIS_exact -> MIS size: 4 MIS: [57, 89, 104, 121] isMIS: True -> Execution time: 0.03641200065612793
+---- MIS_heuristic -> MIS size: 3 MIS: [74, 89, 1] isMIS: True -> Execution time: 0.0014455318450927734
+---- MIS_local_search -> MIS size: 4 MIS: [104, 89, 121, 57] isMIS: True -> Execution time: 0.005293369293212891
+
+-----------------------
+FILE ->  C2000.9.clq.txt
+GRAPH -> nodes: 1000 edges 450079
+---- MIS_exact -> Something went wrong: maximum recursion depth exceeded while calling a Python object
+---- MIS_heuristic -> MIS size: 4 MIS: [403, 618, 1, 385] isMIS: True -> Execution time: 0.21372723579406738
+---- MIS_local_search -> MIS size: 5 MIS: [1, 929, 389, 935, 506] isMIS: True -> Execution time: 8.835345268249512
+
+-----------------------
+FILE ->  C250.9.clq.txt
+GRAPH -> nodes: 250 edges 27984
+---- MIS_exact -> MIS size: 5 MIS: [72, 111, 185, 207, 248] isMIS: True -> Execution time: 0.6790509223937988
+---- MIS_heuristic -> MIS size: 4 MIS: [1, 131, 154, 97] isMIS: True -> Execution time: 0.00302886962890625
+---- MIS_local_search -> MIS size: 5 MIS: [1, 243, 116, 171, 125] isMIS: True -> Execution time: 0.06884932518005371
+
+-----------------------
+FILE ->  C500.9.clq.txt
+GRAPH -> nodes: 500 edges 112332
+---- MIS_exact -> MIS size: 5 MIS: [247, 297, 311, 425, 435] isMIS: True -> Execution time: 18.61202096939087
+---- MIS_heuristic -> MIS size: 4 MIS: [22, 1, 15, 74] isMIS: True -> Execution time: 0.009928226470947266
+---- MIS_local_search -> MIS size: 4 MIS: [22, 1, 15, 74] isMIS: True -> Execution time: 0.6016016006469727
+
+-----------------------
+FILE ->  DSJC1000.5.clq.txt
+GRAPH -> nodes: 1000 edges 249826
+---- MIS_exact -> Max Time (1800 s) Exceeded
+---- MIS_heuristic -> MIS size: 10 MIS: [550, 174, 528, 841, 304, 640, 431, 459, 1, 471] isMIS: True -> Execution time: 0.03143811225891113
+---- MIS_local_search -> Max Time (1800 s) Exceeded
+
+-----------------------
+FILE ->  DSJC500.5.clq.txt
+GRAPH -> nodes: 500 edges 62624
+---- MIS_exact -> Max Time (1800 s) Exceeded
+---- MIS_heuristic -> MIS size: 9 MIS: [236, 241, 91, 12, 57, 167, 92, 223, 1] isMIS: True -> Execution time: 0.008040189743041992
+---- MIS_local_search -> Max Time (1800 s) Exceeded
+
+-----------------------
+FILE ->  gen200_p0.9_44.txt
+GRAPH -> nodes: 200 edges 17910
+---- MIS_exact -> MIS size: 5 MIS: [93, 111, 132, 134, 166] isMIS: True -> Execution time: 0.2838602066040039
+---- MIS_heuristic -> MIS size: 3 MIS: [30, 31, 1] isMIS: True -> Execution time: 0.0023522377014160156
+---- MIS_local_search -> MIS size: 5 MIS: [132, 166, 134, 93, 30] isMIS: True -> Execution time: 0.02928447723388672
+
+-----------------------
+FILE ->  gen200_p0.9_55.txt
+GRAPH -> nodes: 200 edges 17910
+---- MIS_exact -> MIS size: 5 MIS: [14, 47, 84, 96, 183] isMIS: True -> Execution time: 0.2745487689971924
+---- MIS_heuristic -> MIS size: 3 MIS: [47, 1, 198] isMIS: True -> Execution time: 0.0016949176788330078
+---- MIS_local_search -> MIS size: 4 MIS: [1, 98, 185, 68] isMIS: True -> Execution time: 0.019140243530273438
+
+-----------------------
+FILE ->  gen400_p0.9_55.txt
+GRAPH -> nodes: 400 edges 71820
+---- MIS_exact -> MIS size: 8 MIS: [81, 113, 132, 177, 193, 230, 327, 344] isMIS: True -> Execution time: 10.133318185806274
+---- MIS_heuristic -> MIS size: 3 MIS: [139, 237, 1] isMIS: True -> Execution time: 0.006720542907714844
+---- MIS_local_search -> MIS size: 7 MIS: [1, 163, 342, 168, 90, 269, 63] isMIS: True -> Execution time: 0.490447998046875
+
+-----------------------
+FILE ->  gen400_p0.9_65.txt
+GRAPH -> nodes: 400 edges 71820
+---- MIS_exact -> MIS size: 7 MIS: [109, 239, 261, 278, 312, 334, 373] isMIS: True -> Execution time: 8.451099395751953
+---- MIS_heuristic -> MIS size: 4 MIS: [361, 29, 1, 102] isMIS: True -> Execution time: 0.007392168045043945
+---- MIS_local_search -> MIS size: 6 MIS: [102, 313, 184, 377, 250, 398] isMIS: True -> Execution time: 0.5419471263885498
+
+-----------------------
+FILE ->  gen400_p0.9_75.txt
+GRAPH -> nodes: 400 edges 71820
+---- MIS_exact -> MIS size: 6 MIS: [215, 265, 274, 309, 363, 390] isMIS: True -> Execution time: 8.393476486206055
+---- MIS_heuristic -> MIS size: 3 MIS: [119, 238, 1] isMIS: True -> Execution time: 0.006449222564697266
+---- MIS_local_search -> MIS size: 5 MIS: [181, 230, 119, 264, 330] isMIS: True -> Execution time: 0.3101491928100586
+
+-----------------------
+FILE ->  hamming10-4.clq.txt
+GRAPH -> nodes: 1024 edges 434176
+---- MIS_exact -> Max Time (1800 s) Exceeded
+---- MIS_heuristic -> MIS size: 8 MIS: [0, 1, 2, 3, 4, 5, 6, 7] isMIS: True -> Execution time: 0.0344696044921875
+---- MIS_local_search -> Max Time (1800 s) Exceeded
+
+-----------------------
+FILE ->  hamming8-4.clq.txt
+GRAPH -> nodes: 256 edges 20864
+---- MIS_exact -> Max Time (1800 s) Exceeded
+---- MIS_heuristic -> MIS size: 8 MIS: [0, 1, 2, 3, 4, 5, 6, 7] isMIS: True -> Execution time: 0.002651691436767578
+---- MIS_local_search -> MIS size: 16 MIS: [128, 1, 65, 129, 131, 133, 192, 193, 195, 137, 197, 201, 145, 209, 161, 225] isMIS: True -> Execution time: 140.43387627601624
+
+-----------------------
+FILE ->  keller4.clq.txt
+GRAPH -> nodes: 171 edges 9435
+---- MIS_exact -> MIS size: 15 MIS: [112, 113, 116, 117, 128, 129, 132, 133, 158, 159, 162, 163, 168, 169, 170] isMIS: True -> Execution time: 35.365413427352905
+---- MIS_heuristic -> MIS size: 4 MIS: [45, 68, 20, 1] isMIS: True -> Execution time: 0.001447916030883789
+---- MIS_local_search -> MIS size: 15 MIS: [128, 129, 68, 132, 69, 70, 133, 112, 113, 116, 117, 58, 59, 62, 63] isMIS: True -> Execution time: 2.6381404399871826
+
+-----------------------
+FILE ->  keller5.clq.txt
+GRAPH -> nodes: 776 edges 225990
+---- MIS_exact -> Max Time (1800 s) Exceeded
+---- MIS_heuristic -> MIS size: 10 MIS: [219, 242, 212, 209, 211, 214, 38, 79, 37, 1] isMIS: True -> Execution time: 0.030637264251708984
+---- MIS_local_search -> Max Time (1800 s) Exceeded
+
+-----------------------
+FILE ->  MANN_a27.clq.txt
+GRAPH -> nodes: 378 edges 70551
+---- MIS_exact -> MIS size: 3 MIS: [375, 376, 377] isMIS: True -> Execution time: 3.0577971935272217
+---- MIS_heuristic -> MIS size: 2 MIS: [1, 28] isMIS: True -> Execution time: 0.005955696105957031
+---- MIS_local_search -> MIS size: 3 MIS: [27, 28, 29] isMIS: True -> Execution time: 0.09365057945251465
+
+FILE ->  p_hat1500-1.clq.txt
+GRAPH -> nodes: 1500 edges 284923
+---- MIS_exact -> Max Time (1800 s) Exceeded
+---- MIS_heuristic -> MIS size: 74 MIS: [765, 940, 1040, 184, 954, 399, 769, 798, 679, 1205, 416, 393, 1450, 811, 517, 452, 608, 1152, 1275, 1400, 730, 1239, 488, 1363, 653, 57, 65, 936, 523, 1215, 492, 1454, 475, 1439, 426, 430, 1394, 1214, 886, 1253, 375, 1278, 1082, 1354, 82, 329, 161, 105, 827, 219, 1356, 398, 577, 693, 158, 851, 413, 854, 1333, 847, 1391, 301, 994, 522, 238, 1002, 18, 1018, 1258, 907, 1486, 1228, 1022, 1] isMIS: True -> Execution time: 0.03186225891113281
+---- MIS_local_search -> Max Time (1800 s) Exceeded
+
+-----------------------
+FILE ->  p_hat1500-2.clq.txt
+GRAPH -> nodes: 1500 edges 284923
+---- MIS_exact -> Max Time (1800 s) Exceeded
+---- MIS_heuristic -> MIS size: 74 MIS: [765, 940, 1040, 184, 954, 399, 769, 798, 679, 1205, 416, 393, 1450, 811, 517, 452, 608, 1152, 1275, 1400, 730, 1239, 488, 1363, 653, 57, 65, 936, 523, 1215, 492, 1454, 475, 1439, 426, 430, 1394, 1214, 886, 1253, 375, 1278, 1082, 1354, 82, 329, 161, 105, 827, 219, 1356, 398, 577, 693, 158, 851, 413, 854, 1333, 847, 1391, 301, 994, 522, 238, 1002, 18, 1018, 1258, 907, 1486, 1228, 1022, 1] isMIS: True -> Execution time: 0.05854034423828125
+---- MIS_local_search -> Max Time (1800 s) Exceeded
+
+-----------------------
+FILE ->  p_hat1500-3.clq.txt
+GRAPH -> nodes: 1500 edges 847244
+---- MIS_exact -> Max Time (1800 s) Exceeded
+---- MIS_heuristic -> MIS size: 7 MIS: [811, 1367, 559, 399, 838, 1178, 1] isMIS: True -> Execution time: 0.10218524932861328
+---- MIS_local_search -> Max Time (1800 s) Exceeded
+
+-----------------------
+FILE ->  p_hat300-2.clq.txt
+GRAPH -> nodes: 300 edges 21928
+---- MIS_exact -> Max Time (1800 s) Exceeded
+---- MIS_heuristic -> MIS size: 24 MIS: [68, 131, 186, 182, 112, 237, 59, 11, 240, 277, 7, 33, 63, 185, 281, 1, 111, 154, 256, 115, 45, 166, 242, 133] isMIS: True -> Execution time: 0.003612518310546875
+---- MIS_local_search -> Max Time (1800 s) Exceeded
+
+-----------------------
+FILE ->  p_hat300-3.clq.txt
+GRAPH -> nodes: 300 edges 33390
+---- MIS_exact -> MIS size: 9 MIS: [33, 38, 98, 200, 206, 228, 233, 241, 248] isMIS: True -> Execution time: 27.79919958114624
+---- MIS_heuristic -> MIS size: 7 MIS: [237, 68, 277, 1, 202, 59, 171] isMIS: True -> Execution time: 0.0028967857360839844
+---- MIS_local_search -> MIS size: 8 MIS: [162, 68, 229, 141, 237, 277, 278, 287] isMIS: True -> Execution time: 3.078629970550537
+
+-----------------------
+FILE ->  p_hat300_1.clq.txt
+GRAPH -> nodes: 300 edges 10933
+---- MIS_exact -> Max Time (1800 s) Exceeded
+---- MIS_heuristic -> MIS size: 35 MIS: [68, 186, 277, 131, 59, 182, 21, 112, 294, 63, 115, 111, 240, 11, 0, 281, 33, 237, 247, 7, 64, 154, 1, 166, 156, 232, 242, 142, 84, 113, 185, 209, 92, 45, 141] isMIS: True -> Execution time: 0.002100706100463867
+---- MIS_local_search -> Max Time (1800 s) Exceeded
+
+-----------------------
+FILE ->  p_hat700-1.clq.txt
+GRAPH -> nodes: 700 edges 60999
+---- MIS_exact -> Max Time (1800 s) Exceeded
+---- MIS_heuristic -> MIS size: 55 MIS: [475, 601, 388, 493, 382, 181, 142, 159, 230, 241, 304, 425, 46, 380, 602, 472, 535, 563, 1, 145, 197, 348, 403, 497, 133, 654, 373, 471, 673, 136, 466, 585, 120, 518, 656, 678, 52, 337, 547, 32, 94, 119, 402, 442, 195, 400, 444, 124, 288, 404, 546, 542, 66, 644, 88] isMIS: True -> Execution time: 0.008395671844482422
+---- MIS_local_search -> Max Time (1800 s) Exceeded
+
+-----------------------
+FILE ->  p_hat700-2.clq.txt
+GRAPH -> nodes: 700 edges 121728
+---- MIS_exact -> Max Time (1800 s) Exceeded
+---- MIS_heuristic -> MIS size: 43 MIS: [403, 348, 136, 304, 601, 475, 181, 197, 230, 493, 585, 46, 656, 388, 612, 380, 602, 1, 678, 382, 195, 241, 471, 563, 159, 32, 472, 133, 400, 546, 513, 654, 79, 119, 547, 315, 404, 373, 457, 319, 528, 616, 634] isMIS: True -> Execution time: 0.013852596282958984
+---- MIS_local_search -> Max Time (1800 s) Exceeded
+
+-----------------------
+FILE ->  p_hat700-3.clq.txt
+GRAPH -> nodes: 700 edges 183010
+---- MIS_exact -> Max Time (1800 s) Exceeded
+---- MIS_heuristic -> MIS size: 7 MIS: [403, 304, 348, 602, 525, 1, 269] isMIS: True -> Execution time: 0.019107818603515625
+---- MIS_local_search -> MIS size: 10 MIS: [1, 359, 136, 124, 625, 82, 403, 632, 475, 348] isMIS: True -> Execution time: 392.61467838287354
