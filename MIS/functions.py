@@ -132,7 +132,7 @@ def print_test_result(funcName, mis, isMis, duration):
     :param funcName: nombre de la funcion a ejecutar
     :param mis: posible conjunto independiente maximal
     :param isMis: booleano que indica si mis es realmente maximal
-    :paran duration: tiempo (en segundos) que toma en ejecutarse funcName
+    :param duration: tiempo (en segundos) que toma en ejecutarse funcName
     """
     print("---- {funcName} -> MIS size: {misSize} MIS: {mis} isMIS: {isMIS} -> Execution time: {duration}".format(
         funcName=funcName, misSize=len(mis), mis=mis, isMIS=isMis, duration=duration))
@@ -141,6 +141,8 @@ def print_test_result(funcName, mis, isMis, duration):
 def test_benchmark(time):
     """
     Funcion para testear todos los files del benchmark
+    
+    :param time: tiempo maximo para ejecutar una funcion
     """
     dirname = "benchmark"
     filenames = next(walk(dirname), (None, None, []))[2]
@@ -165,6 +167,11 @@ def test_benchmark(time):
 
 
 def load_cubical_graph():
+    """
+    Funcion que carga un grafo cubico
+    
+    :return: grafo cargado
+    """
     G = rx.PyGraph()
 
     G.add_nodes_from(list(range(8)))
@@ -174,6 +181,11 @@ def load_cubical_graph():
     return "CUBICAL", G
 
 def load_p3_graph():
+    """
+    Funcion que carga un grafo p3
+    
+    :return: grafo cargado
+    """
     G = rx.PyGraph()
 
     G.add_nodes_from(list(range(3)))
@@ -182,6 +194,11 @@ def load_p3_graph():
     return "P3", G
 
 def load_k3_graph():
+    """
+    Funcion que carga un grafo k3
+    
+    :return: grafo cargado
+    """
     G = rx.PyGraph()
 
     G.add_nodes_from(list(range(6)))
@@ -190,6 +207,11 @@ def load_k3_graph():
     return "K3", G
 
 def load_square_triangle_graph():
+    """
+    Funcion que carga un grafo que une un cuadrado con un triangulo
+    
+    :return: grafo cargado
+    """
     G = rx.PyGraph()
 
     G.add_nodes_from(list(range(6)))
@@ -198,6 +220,11 @@ def load_square_triangle_graph():
     return "SQUARE_TRIANGLE", G
 
 def test_defined_graphs(time):
+    """
+    Funcion para testear algunos grafos definidos
+    
+    :param time: tiempo maximo para ejecutar una funcion
+    """
     
     defined_graphs = [load_cubical_graph(), load_k3_graph(), load_p3_graph(), load_square_triangle_graph()]
 
