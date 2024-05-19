@@ -28,7 +28,7 @@ GRAPH -> nodes: 400 edges 59765
 -----------------------
 FILE ->  brock800_2.clq.txt
 GRAPH -> nodes: 800 edges 208166
----- MIS_exact -> Max Time (3600 s) Exceeded
+---- MIS_exact -> Max Time (1800 s) Exceeded
 ---- MIS_heuristic -> MIS size: 7 MIS: [444, 737, 1, 425, 267, 578, 579] isMIS: True -> Execution time: 0.016974210739135742
 ---- MIS_local_search -> MIS size: 9 MIS: [1, 385, 770, 579, 682, 586, 718, 692, 405] isMIS: True -> Execution time: 2135.4206495285034
 
