@@ -5,7 +5,7 @@ def MIS_exact(G):
     Solucion exacta para encontrar el conjunto maximo independiente de un grafo G.
 
     :param G: grafo G
-    :return: indices del grafo que conforman un conjunto independiente maximal
+    :return: indices del grafo que conforman un conjunto independiente maximo
     """ 
     node_indexes = list(G.node_indices())
     
