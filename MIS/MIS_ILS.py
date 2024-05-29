@@ -9,17 +9,24 @@ from .MIS_heuristic import MIS_heuristic
 
 def force(G, S, k):
     _G = G.copy()
-
+    
     for v in S:
-        # Los vertices de G que no son vecinos a un vertices en S
-        _G.neighbors(v)
-        _G.remove_nodes_from(list(v_neighbors))
-
         # Grafo con vertices que no formen parte de la solucion actual
         _G.remove_node(v)
     node_indexes = list(_G.node_indexes())
-
-    kForceInsert = set(choice(node_indexes, k))
+    
+    kForceInsert = set()
+    
+    if len(node_indexes) > 0:
+        kForceInsert = set(choice(node_indexes, k))
+        
+    # Si uno de los nodos a insertar tiene un vecino en la solucion actual, 
+    # sacamos el nodo vecino e insertamos el nuevo
+    _S = S.copy()
+    for v in kForceInsert:
+        for s in S:
+            if v in G.neighbors(s):
+                _S.remove(s)
 
     return _S.union(kForceInsert)
 
@@ -53,7 +60,7 @@ def MIS_ILS(G, max_inter=None):
     S = set(MIS_local_search(G, S0, len(S0) - 1))
 
     # Mejor solucion hasta el momento
-    best_S = S
+    best_S = S.copy()
 
     # i es una especie de contador que nos indicara cuando podemos aceptar un
     # resultado de la perturbacion que sea pero a la solucion actual
@@ -72,12 +79,13 @@ def MIS_ILS(G, max_inter=None):
                    1 - probability_bigger_k, probability_bigger_k])
 
         # Perturbacion de la solucion actual
-        _S = force(G, S, k, history)
+        _S = force(G, S, k)
 
         # Local search sobre el resultado de la perturbacion
-        _S = MIS_local_search(G, _S, len(_S) - 1)
+        _S = set(MIS_local_search(G, _S, len(_S) - 1))
 
         # Definimos si el resultado de la perturbacion es aceptado como nuevo maximum independent set
-        S, best_S, i = acceptanceCondition(S, _S, best_S, history)
+        S, best_S, i = acceptanceCondition(S, _S, best_S, i, itr)
         itr += 1
     return list(best_S)
+
