@@ -20,6 +20,7 @@ def timeout_handler(signum, frame):   # Custom signal handler
 
 signal.signal(signal.SIGALRM, timeout_handler)
 
+
 def timer(func, *args):
     """
     Funcion que calcula el tiempo de ejecucion de otra
@@ -27,11 +28,12 @@ def timer(func, *args):
     :param func: funcion a ejecutar
     :param *args: argumentos de func
     :return: Retorna el resultado de la funcion y el tiempo de ejecucion
-    """ 
+    """
     start = time.time()
     result = func(*args)
     duration = time.time() - start
     return result, duration
+
 
 def timeout(time, func, *args):
     """
@@ -43,24 +45,27 @@ def timeout(time, func, *args):
     :param func: funcion a ejecutar
     :param *args: argumentos de func
     :return: Si func finalizó antes del maximo tiempo de ejecución retorna la respuesta, de lo contrario retorna un conjunto vacío. Retorna en todo caso el tiempo de ejecución
-    """ 
+    """
     signal.alarm(time)
     try:
         res, duration = timer(func, *args)
     except TimeoutException:
-        print("---- {funcName} -> Max Time ({time} s) Exceeded".format(funcName = func.__name__, time = time))
+        print(
+            "---- {funcName} -> Max Time ({time} s) Exceeded".format(funcName=func.__name__, time=time))
         return set(), time
     except Exception as e:
-        print("---- {funcName} -> Something went wrong: {error}".format(funcName = func.__name__, error = e))
+        print(
+            "---- {funcName} -> Something went wrong: {error}".format(funcName=func.__name__, error=e))
         return set(), time
     else:
         # Reset the alarm
         signal.alarm(0)
-        #print results
+        # print results
         print("---- {funcName} -> MIS size: {misSize} MIS: {mis} isMIS: {isMIS} -> Execution time: {duration}".format(
-        funcName=func.__name__, misSize=len(res), mis=res, isMIS=is_MIS(args[0], res), duration=duration))
-        
+            funcName=func.__name__, misSize=len(res), mis=res, isMIS=is_MIS(args[0], res), duration=duration))
+
         return res, duration
+
 
 def is_MIS(G, S):
     """
@@ -69,13 +74,15 @@ def is_MIS(G, S):
     :param G: grafo dado
     :param S: posible conjunto independiente maximal de G
     :return: true si S es MIS para G, false si no
-    """ 
+    """
     for node in S:
-        if any((neighbor in S) for neighbor in G.neighbors(node)): return False
+        if any((neighbor in S) for neighbor in G.neighbors(node)):
+            return False
     for node in G.node_indices():
         if node not in S and not any((neighbor in S) for neighbor in G.neighbors(node)):
             return False
     return True
+
 
 def randomGraph(n, e):
     """
@@ -84,7 +91,7 @@ def randomGraph(n, e):
     :param n: numero de nodos
     :param e: numero de edges
     :return: grafo random con n nodos y e lados
-    """ 
+    """
     G = rx.PyGraph()
     for i in range(n):
         G.add_node(0)
@@ -100,7 +107,7 @@ def load_graph(filename):
 
     :param filename: nombre/path del archivo
     :return: grafo cargado
-    """ 
+    """
     G = rx.PyGraph()
 
     with open(filename) as f:
@@ -125,8 +132,8 @@ def print_test_result(funcName, mis, isMis, duration):
     :param funcName: nombre de la funcion a ejecutar
     :param mis: posible conjunto independiente maximal
     :param isMis: booleano que indica si mis es realmente maximal
-    :paran duration: tiempo (en segundos) que toma en ejecutarse funcName
-    """ 
+    :param duration: tiempo (en segundos) que toma en ejecutarse funcName
+    """
     print("---- {funcName} -> MIS size: {misSize} MIS: {mis} isMIS: {isMIS} -> Execution time: {duration}".format(
         funcName=funcName, misSize=len(mis), mis=mis, isMIS=isMis, duration=duration))
 
@@ -134,7 +141,9 @@ def print_test_result(funcName, mis, isMis, duration):
 def test_benchmark(time):
     """
     Funcion para testear todos los files del benchmark
-    """ 
+    
+    :param time: tiempo maximo para ejecutar una funcion
+    """
     dirname = "benchmark"
     filenames = next(walk(dirname), (None, None, []))[2]
 
@@ -148,9 +157,87 @@ def test_benchmark(time):
         print("FILE -> ", filename)
         print("GRAPH -> nodes: {nodesNumber} edges {edgesNumber}".format(
             nodesNumber=graph.num_nodes(), edgesNumber=graph.num_edges()))
-        
+
         exactRes, exactDuration = timeout(time, MIS_exact, graph)
         heuristicRes, heuristicDuration = timeout(time, MIS_heuristic, graph)
-        localSearchRes, localSearchDuration = timeout(time, MIS_local_search, graph, heuristicRes, len(heuristicRes) - 1)
-        
+        localSearchRes, localSearchDuration = timeout(
+            time, MIS_local_search, graph, heuristicRes, len(heuristicRes) - 1)
+
+        print("\n-----------------------")
+
+
+def load_cubical_graph():
+    """
+    Funcion que carga un grafo cubico
+    
+    :return: grafo cargado
+    """
+    G = rx.PyGraph()
+
+    G.add_nodes_from(list(range(8)))
+    G.add_edges_from_no_data([(0, 1), (1, 2), (2, 3), (3, 0), (4, 5),
+                            (5, 6), (6, 7), (7, 4), (0, 4), (1, 5), (2, 6), (3, 7)])
+    
+    return "CUBICAL", G
+
+def load_p3_graph():
+    """
+    Funcion que carga un grafo p3
+    
+    :return: grafo cargado
+    """
+    G = rx.PyGraph()
+
+    G.add_nodes_from(list(range(3)))
+    G.add_edges_from_no_data([(0, 1), (1, 2)])
+    
+    return "P3", G
+
+def load_k3_graph():
+    """
+    Funcion que carga un grafo k3
+    
+    :return: grafo cargado
+    """
+    G = rx.PyGraph()
+
+    G.add_nodes_from(list(range(6)))
+    G.add_edges_from_no_data([(0, 1), (1, 2), (1, 3), (1, 4), (3, 4), (3, 5), (4, 5)])
+    
+    return "K3", G
+
+def load_square_triangle_graph():
+    """
+    Funcion que carga un grafo que une un cuadrado con un triangulo
+    
+    :return: grafo cargado
+    """
+    G = rx.PyGraph()
+
+    G.add_nodes_from(list(range(6)))
+    G.add_edges_from_no_data([(0, 1), (1, 2), (2, 3), (3, 1), (2, 4), (4, 5), (5, 3)])
+    
+    return "SQUARE_TRIANGLE", G
+
+def test_defined_graphs(time):
+    """
+    Funcion para testear algunos grafos definidos
+    
+    :param time: tiempo maximo para ejecutar una funcion
+    """
+    
+    defined_graphs = [load_cubical_graph(), load_k3_graph(), load_p3_graph(), load_square_triangle_graph()]
+
+    print("---------TESTS---------")
+    for graph_data in defined_graphs:
+        graph = graph_data[1]
+        print("NAME -> ", graph_data[0])
+        print("GRAPH -> nodes: {nodesNumber} edges {edgesNumber}".format(
+            nodesNumber=graph.num_nodes(), edgesNumber=graph.num_edges()))
+
+        exactRes, exactDuration = timeout(time, MIS_exact, graph)
+        heuristicRes, heuristicDuration = timeout(time, MIS_heuristic, graph)
+        localSearchRes, localSearchDuration = timeout(
+            time, MIS_local_search, graph, heuristicRes, len(heuristicRes) - 1)
+
         print("\n-----------------------")

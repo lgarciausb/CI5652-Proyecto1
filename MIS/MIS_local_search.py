@@ -11,7 +11,7 @@ def MIS_local_search(G, S, k=1):
     :param G: grafo G
     :param S: conjunto independiente de G
     :param k: cuanto exchanges se van a realizar
-    :return: indices del grafo que conforman un conjunto independiente maximal
+    :return: indices del grafo que conforman un conjunto independiente maximo
     """ 
     if k <= 0 and k >= len(S):
         return S

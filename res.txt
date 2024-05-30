@@ -28,7 +28,7 @@ GRAPH -> nodes: 400 edges 59765
 -----------------------
 FILE ->  brock800_2.clq.txt
 GRAPH -> nodes: 800 edges 208166
----- MIS_exact -> Max Time (3600 s) Exceeded
+---- MIS_exact -> Max Time (1800 s) Exceeded
 ---- MIS_heuristic -> MIS size: 7 MIS: [444, 737, 1, 425, 267, 578, 579] isMIS: True -> Execution time: 0.016974210739135742
 ---- MIS_local_search -> MIS size: 9 MIS: [1, 385, 770, 579, 682, 586, 718, 692, 405] isMIS: True -> Execution time: 2135.4206495285034
 
@@ -156,6 +156,13 @@ GRAPH -> nodes: 378 edges 70551
 ---- MIS_exact -> MIS size: 3 MIS: [375, 376, 377] isMIS: True -> Execution time: 3.0577971935272217
 ---- MIS_heuristic -> MIS size: 2 MIS: [1, 28] isMIS: True -> Execution time: 0.005955696105957031
 ---- MIS_local_search -> MIS size: 3 MIS: [27, 28, 29] isMIS: True -> Execution time: 0.09365057945251465
+
+-----------------------
+FILE ->  MANN_a45.clq.txt
+GRAPH -> nodes: 1035 edges 533115
+---- MIS_exact -> Something went wrong: maximum recursion depth exceeded while calling a Python object
+---- MIS_heuristic -> MIS size: 2 MIS: [1, 55] isMIS: True -> Execution time: 0.10945661323649522
+---- MIS_local_search -> MIS size: 3 MIS: [56, 54, 55] isMIS: True -> Execution time: 2.566702154145634
 
 FILE ->  p_hat1500-1.clq.txt
 GRAPH -> nodes: 1500 edges 284923
