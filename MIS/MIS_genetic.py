@@ -121,9 +121,9 @@ def MIS_genetic(G, pop_size, mutation_rate, max_no_improvement):
             if no_improvement == max_no_improvement:
                 break
 
-        avg = sum(p[0].count(True) for p in pop)/len(pop)
-        avgf = sum(p[1] for p in pop)/len(pop)
-        print(I, "len", best[0].count(True), "score", best[1],"avgl", avg, "avgf", avgf, "maxF", maxF[1], "mut", mutation_rate+no_improvement/mutation_factor)
+        #avg = sum(p[0].count(True) for p in pop)/len(pop)
+        #avgf = sum(p[1] for p in pop)/len(pop)
+        #print(I, "len", best[0].count(True), "score", best[1],"avgl", avg, "avgf", avgf, "maxF", maxF[1], "mut", mutation_rate+no_improvement/mutation_factor)
         
         pop.sort(key=lambda p: p[1])
         pop = pop[int(len(pop)/2):]
@@ -133,8 +133,7 @@ def MIS_genetic(G, pop_size, mutation_rate, max_no_improvement):
             p1, p2 = sample(pop, 2)
             child = mix_cross(p1[0],p2[0])
             # sample(pop,1)[0][0]
-            child = mutate(child, mutation_rate+no_improvement/mutation_factor)
+            child = mutate(child, mutation_rate)#+no_improvement/mutation_factor
             children.append([child, None])
         pop += children
-        avg = sum(p.count(True) for p in pop)/len(pop)
     return best[0]
