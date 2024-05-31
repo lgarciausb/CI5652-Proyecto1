@@ -10,6 +10,7 @@ from .MIS_local_search import MIS_local_search
 from .MIS_ILS import MIS_ILS
 from .MIS_tabu_search import MIS_tabu_search
 from .MIS_simulated_annealing import MIS_simulated_annealing
+from .MIS_genetic import MIS_genetic
 from .MIS_GRASP import MIS_GRASP
 
 import signal
@@ -194,7 +195,8 @@ def test_benchmark(time, project_part = 1):
                 time, MIS_simulated_annealing, graph)
             grasp_res, size_grasp_res, is_mis_grasp_res, grasp_duration, grasp_warning = timeout(
                 time, MIS_GRASP, graph)
-            genetic_res, size_genetic_res, is_mis_genetic_res, genetic_duration, genetic_warning = set(), 0, False, 0, "TODO TEST"
+            genetic_res, size_genetic_res, is_mis_genetic_res, genetic_duration, genetic_warning = timeout(
+                time, MIS_genetic, graph, 500, 10, 500)
 
             index = ["ils", "tabu", "sa", "grasp", "genetic"]
             times = [ils_duration, tabu_duration, sa_duration, grasp_duration, genetic_duration]

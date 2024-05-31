@@ -3,7 +3,7 @@ from random import randint, choice, sample
 import rustworkx as rx
 from math import inf
 
-from MIS_heuristic import MIS_heuristic2
+from .MIS_heuristic import MIS_heuristic2
 
 
 def is_MIS(G, S):
