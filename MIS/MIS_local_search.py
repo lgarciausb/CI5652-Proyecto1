@@ -13,13 +13,14 @@ def MIS_local_search(G, S, k=1):
     :param k: cuanto exchanges se van a realizar
     :return: indices del grafo que conforman un conjunto independiente maximo
     """ 
+    _G = G.copy()
+    _S = S.copy()
     if k <= 0 and k >= len(S):
         return S
     kS = set(combinations(S, k))
     node_indexes = G.node_indices()
     for k_tuple in kS:
         V = set(S).difference(set(k_tuple))
-        _G = G.copy()
         for v in V:
             v_neighbors = G.neighbors(v)
             _G.remove_nodes_from(v_neighbors)
@@ -27,6 +28,6 @@ def MIS_local_search(G, S, k=1):
         newS = set(MIS_exact(_G))
 
         if len(newS) > k:
-            S = list(V.union(newS))
-            MIS_local_search(G, S, k)
-    return S
+            _S = list(V.union(newS))
+            MIS_local_search(G, _S, k)
+    return _S

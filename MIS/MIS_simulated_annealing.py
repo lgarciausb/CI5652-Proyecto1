@@ -6,7 +6,7 @@ import rustworkx as rx
 from .MIS_heuristic import MIS_heuristic
 
 
-def f(G, S, c=1):
+def f(G, S, c=2):
     """
     Funcion de evaluacion de una posible solucion. Es su tamano pues es lo que buscamos maximizar.
     
@@ -30,7 +30,7 @@ def exptbl(difference_f, T_cycle):
     return exp(-difference_f / T_cycle)
 
 
-def MIS_simulated_annealing(G, T0 = 10.0, max_cycles=10, max_trials = 25000, max_changes = 2000):
+def MIS_simulated_annealing(G, T0 = 10.0, max_cycles=10, max_trials = 250000, max_changes = 20000):
     """
     Recocido simulado para encontrar el conjunto maximo independiente de un grafo G.
 
@@ -61,11 +61,11 @@ def MIS_simulated_annealing(G, T0 = 10.0, max_cycles=10, max_trials = 25000, max
     alpha = 0.99
 
     # Contador del ciclo de temperatura
-    cycle = 0
+    cycles = 0
 
     node_indexes = list(G.node_indexes())
 
-    while cycle < max_cycles:
+    while cycles < max_cycles:
         trials, changes = 0, 0
         while trials < max_trials and changes < max_changes:
             # Procedemos con el primer ensayo (trial)
@@ -105,5 +105,5 @@ def MIS_simulated_annealing(G, T0 = 10.0, max_cycles=10, max_trials = 25000, max
         # Actualizamos la temperatura (nuestro cooling schedule o proceso de enfriamiento)
         T_cycle = T_cycle * alpha
         if changes < max_changes:
-            cycle += 1
-    return S
+            cycles += 1
+    return list(S)

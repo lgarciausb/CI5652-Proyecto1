@@ -292,4 +292,4 @@ def MIS_tabu_search(G, max_iter=10):
 
         T = updateT(T, itr)
         
-    return S
+    return list(S)
