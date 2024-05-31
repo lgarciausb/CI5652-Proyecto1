@@ -11,6 +11,6 @@ if __name__ == "__main__":
         else:
             test_benchmark(time, project_part)
     except IndexError:
-        print(f"Usage: {argv[0]} <project_part> <time> <defined_graph: optional>")
+        print(f"Usage: {argv[0]} <project_part> <time_minutes> <defined_graph: optional>")
     except ValueError as e:
-        print(f"Error: <time> must be a numeric value")
+        print(f"Error: <time> must be a numeric value representing minutes")
