@@ -4,7 +4,6 @@ import rustworkx as rx
 
 from .MIS_heuristic import MIS_heuristic
 
-
 def f(S):
     """
     Funcion de evaluacion de una posible solucion. Es su tamano pues es lo que buscamos maximizar.
