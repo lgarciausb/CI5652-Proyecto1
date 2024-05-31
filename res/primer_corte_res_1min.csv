@@ -1,4 +1,0 @@
-,Result,Result,Result,Size Result,Size Result,Size Result,Is MIS,Is MIS,Is MIS,Time,Time,Time,Warnings,Warnings,Warnings
-,exact,heuristic,local search,exact,heuristic,local search,exact,heuristic,local search,exact,heuristic,local search,exact,heuristic,local search
-C2000.9.clq.txt n=1000 e=450079,set(),"[403, 618, 1, 385]","[1, 929, 389, 935, 506]",0,4,5,False,True,True,60.0,0.0881509780883789,7.787700653076172,TIMEOUT,,
-C125.9.clq.txt n=125 e=6963,"[57, 89, 104, 121]","[74, 89, 1]","[104, 89, 121, 57]",4,3,4,True,True,True,0.0941319465637207,0.0008931159973144531,0.0035400390625,,,
