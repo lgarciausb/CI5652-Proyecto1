@@ -34,7 +34,7 @@ def force(G, S, k):
     for v in kForceInsert:
         for s in S:
             if v in G.neighbors(s):
-                _S.remove(s)
+                _S.discard(s)
 
     return _S.union(kForceInsert)
 
