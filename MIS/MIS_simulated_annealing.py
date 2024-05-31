@@ -12,7 +12,7 @@ def f(G, S, c=1):
     
     :pram G: grafo del que se quiere obtener solucio
     :param S: solucion
-    :param c: una constante por la que se multiplicara el numero de edges en grafo inducido por la solucion
+    :param c: una constante natural positiva por la que se multiplicara el numero de edges en grafo inducido por la solucion. c > 1
     :return: evaluacion numerica (funcion objetivo) de la solucion
     """
     G_induced_S = G.subgraph(list(S))
