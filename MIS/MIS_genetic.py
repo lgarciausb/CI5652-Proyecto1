@@ -136,4 +136,4 @@ def MIS_genetic(G, pop_size, mutation_rate, max_no_improvement):
             child = mutate(child, mutation_rate)#+no_improvement/mutation_factor
             children.append([child, None])
         pop += children
-    return best[0]
+    return [i for i in range(len(best[0])) if best[0][i] == True]
