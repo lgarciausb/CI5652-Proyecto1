@@ -1,6 +1,7 @@
 from operator import itemgetter
 from numpy.random import choice
 from heapq import nlargest
+from random import randrange
 import rustworkx as rx
 
 from .MIS_local_search import MIS_local_search
@@ -95,10 +96,11 @@ def MIS_ILS(G, max_iter=None):
     # El criterio de parada es un numero maximo de iteraciones definidos o, en su lugar, la cantidad de
     # arcos del grafo
     while itr < (max_iter if max_iter is not None else num_edges):
-        # Elegimos un k para la perturbacion siento que si estamos en la primera iteracion
+        # Elegimos un k para la perturbacion tal que si estamos en la primera iteracion
         # k = 1 siempre y, si no, con una probabilidad pequena de 1 / (2 * len(S)) elegimos un k mayor a 1.
         # La mayor parte del tiempo k == 1
-        possible_k = [1, i + 1]
+        num_left_verteces = G.subgraph(list(set(G.node_indexes()).difference(S))).num_nodes()       
+        possible_k = [1, randrange(2, num_left_verteces) if num_left_verteces > 2 else 1]
         probability_bigger_k = 1 / (2 * len(S))
         k = choice(possible_k, 1, p=[
                    1 - probability_bigger_k, probability_bigger_k])
