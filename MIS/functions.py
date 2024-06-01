@@ -208,8 +208,8 @@ def test_benchmark(time, project_part=1):
                              is_mis_sa_res, is_mis_grasp_res, is_mis_genetic_res]
             result_size = [size_ils_res, size_tabu_res,
                            size_sa_res, size_grasp_res, size_genetic_res]
-            warnings = {ils_warning, tabu_warning,
-                        sa_warning, grasp_warning, genetic_warning}
+            warnings = [ils_warning, tabu_warning,
+                        sa_warning, grasp_warning, genetic_warning]
 
         data.append(result + result_size + is_mis_result + times + warnings)
 
