@@ -335,13 +335,13 @@ def test_defined_graphs(time, project_part=1):
             times = [ils_duration, tabu_duration,
                      sa_duration, grasp_duration, genetic_duration]
             result = [ils_res, tabu_res, sa_res, grasp_res, genetic_res]
-            is_mis_result = [is_mis_ils_res, is_mis_tabu_res,
+            is_mis_result = [is_mis_ils_res, is_mis_tabu_res, 
                              is_mis_sa_res, is_mis_grasp_res, is_mis_genetic_res]
-            result_size = [size_ils_res, size_tabu_res,
+            result_size = [size_ils_res, size_tabu_res, 
                            size_sa_res, size_grasp_res, size_genetic_res]
-            warnings = {ils_warning, tabu_warning,
-                        sa_warning, grasp_warning, genetic_warning}
-
+            warnings = [ils_warning, tabu_warning, 
+                        sa_warning, grasp_warning, genetic_warning]
+        
         data.append(result + result_size + is_mis_result + times + warnings)
 
         print("\n-----------------------")
