@@ -1,0 +1,6 @@
+,Result,Result,Result,Result,Result,Size Result,Size Result,Size Result,Size Result,Size Result,Is MIS,Is MIS,Is MIS,Is MIS,Is MIS,Time,Time,Time,Time,Time,Warnings,Warnings,Warnings,Warnings,Warnings
+,ils,tabu,sa,grasp,genetic,ils,tabu,sa,grasp,genetic,ils,tabu,sa,grasp,genetic,ils,tabu,sa,grasp,genetic,ils,tabu,sa,grasp,genetic
+CUBICAL n=8 e=12,"[1, 3, 4, 6]","[1, 3, 4, 6]","[4, 5]","[1, 3, 4, 6]","[0, 2, 5, 7]",4,4,2,4,4,True,True,False,True,True,0.0024862289428710938,0.0008587837219238281,256.4351601600647,0.0007658004760742188,0.00914764404296875,,,,,
+K3 n=6 e=7,"[0, 2, 5]","[0, 2, 5]","[0, 2, 4]","[0, 2, 4, 5]","[0, 2, 4]",3,3,3,4,3,True,True,True,False,True,0.0010571479797363281,0.0007789134979248047,288.7825825214386,0.0006432533264160156,0.005952596664428711,,,,,
+P3 n=3 e=2,"[0, 2]","[0, 2]",set(),"[0, 2]","[0, 2]",2,2,0,2,2,True,True,False,True,True,0.00031447410583496094,0.0005087852478027344,900.0,0.00034308433532714844,0.005656003952026367,,,TIMEOUT,,
+SQUARE_TRIANGLE n=6 e=7,"[1, 3, 4]","[1, 3, 4]","[1, 3, 4]","[1, 3, 4, 5]","[0, 4]",3,3,3,4,2,True,True,True,False,True,0.002006053924560547,0.0008156299591064453,353.60828709602356,0.0008237361907958984,0.008146524429321289,,,,,
