@@ -22,13 +22,39 @@ def force(G, S, k):
     for v in S:
         # Grafo con vertices que no formen parte de la solucion actual
         _G.remove_node(v)
-    node_indexes = list(_G.node_indexes())
+    node_indexes = set(_G.node_indexes())
     
     kForceInsert = set()
     
     if len(node_indexes) > 0:
-        kForceInsert = set(choice(node_indexes, k))
-        
+        chosen_v = choice(list(node_indexes))
+        kForceInsert.add(chosen_v)
+                
+        if k > 1:
+            _k = 1
+            neighbors = set(_G.neighbors(chosen_v))
+            
+            __G = _G.copy()
+            __G.remove_node(chosen_v)
+            __node_indexes = set(__G.node_indexes())
+            
+            while _k < k and len(__node_indexes) > 0:
+                
+                if len(kForceInsert) > 1:
+                    for v in kForceInsert:
+                        neighbors = neighbors.intersection(set(_G.neighbors(v)))
+                
+                available_valid_i = __node_indexes.difference(neighbors)
+                
+                if len(available_valid_i) == 0:
+                    break
+                
+                chosen_v = choice(list(available_valid_i))
+                kForceInsert.add(chosen_v)
+                k += 1
+                __G.remove_node(chosen_v)
+                __node_indexes = set(__G.node_indexes())
+     
     # Si uno de los nodos a insertar tiene un vecino en la solucion actual, 
     # sacamos el nodo vecino e insertamos el nuevo
     _S = S.copy()
