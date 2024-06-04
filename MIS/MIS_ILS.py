@@ -8,7 +8,7 @@ from .MIS_local_search import MIS_local_search
 from .MIS_heuristic import MIS_heuristic
 
 
-def force(G, S, k):
+def force(G, S, k, history, itr):
     """
     Perturbacion que consta de agregar k vertices randoms pertenecientes al grafo G pero
     que no formen parte de la solucion S y, si sus vecinos forman parte de S, retirarlos de S
@@ -18,81 +18,88 @@ def force(G, S, k):
     :return: solucion perturbada
     """ 
     _G = G.copy()
+    _S = S.copy()
     
     for v in S:
         # Grafo con vertices que no formen parte de la solucion actual
         _G.remove_node(v)
-    node_indexes = set(_G.node_indexes())
+    node_indexes = list(_G.node_indexes())
     
-    kForceInsert = set()
-    
-    if len(node_indexes) > 0:
-        chosen_v = choice(list(node_indexes))
-        kForceInsert.add(chosen_v)
-                
-        if k > 1:
-            _k = 1
-            neighbors = set(_G.neighbors(chosen_v))
-            
-            __G = _G.copy()
-            __G.remove_node(chosen_v)
-            __node_indexes = set(__G.node_indexes())
-            
-            while _k < k and len(__node_indexes) > 0:
-                
-                if len(kForceInsert) > 1:
-                    for v in kForceInsert:
-                        neighbors = neighbors.intersection(set(_G.neighbors(v)))
-                
-                available_valid_i = __node_indexes.difference(neighbors)
-                
-                if len(available_valid_i) == 0:
-                    break
-                
-                chosen_v = choice(list(available_valid_i))
-                kForceInsert.add(chosen_v)
-                k += 1
-                __G.remove_node(chosen_v)
-                __node_indexes = set(__G.node_indexes())
-     
-    # Si uno de los nodos a insertar tiene un vecino en la solucion actual, 
-    # sacamos el nodo vecino e insertamos el nuevo
-    _S = S.copy()
-    for v in kForceInsert:
+    if k == 1:
+        
+        chosen_v = choice(node_indexes)
+        history[chosen_v] = itr
+        
+        # Borramos de la solucion los vecinos del elegido
+        chosen_v_neighbors = G.neighbors(chosen_v)
         for s in S:
-            if v in G.neighbors(s):
+            if s in chosen_v_neighbors:
                 _S.discard(s)
+        _S.add(chosen_v)
+    else:
+        
+        # Seleccionamos aleatoriamente k vertices que tengan al menos un vecino en S y no esten en S
+        possible_k = []
+        
+        for v in node_indexes:
+            for s in S:
+                if v in G.neighbors(s):
+                    possible_k.append(v)
+        
+        # Seleccionamos 4 vertices de entre los que tienen al menos un vecino en S
+        possible_k = choice(possible_k, 4)
+                
+        # Elegimos a alguno de los que lleven menos iteraciones desde que estuvieron en S (si estuvieron alguna vez)
+        last_itr_possible_k = {v: history.get(v, 0) for v in possible_k}
+        chosen_v = min(last_itr_possible_k, key=last_itr_possible_k.get)
+                
+        # Queremos incluir tambien aquellos que esten a distancia dos (2) del vertice elegido y no esten en S
+        distances_from_chosen_v = rx.distance_matrix(G)[chosen_v]
+        distance_2_from_chosen_v = [u for u, d in enumerate(distances_from_chosen_v) if d == 2 and u not in S]
+        
+        # Elegimos k - 1 vertices de los que esten a dos de distancia del primer vertice elegido (hay al menos un vertice que impide que sean vecinos), si lo hay
+        # Si no hay suficientes vertices para sumar k - 1, entonces solo aquellos que cumplan incluso si son menos.
+        chosen = set()
+        if len(distance_2_from_chosen_v) > 0:
+            chosen = set(choice(distance_2_from_chosen_v, k - 1))
+        chosen.add(chosen_v)
+        
+        # Borramos de la solucion los vecinos de los elegidos
+        for v in chosen:
+            for s in S:
+                if s in G.neighbors(v):
+                    _S.discard(s)
+            _S.add(v)
+            history[v] = itr
+            S = _S.copy()
 
-    return _S.union(kForceInsert)
+    return _S
 
 
-def acceptanceCondition(S, _S, best_S, i, itr):
+def acceptanceCondition(S, _S, i, itr):
     """
     Condicion de aceptacion para decidir si la solucion perturbada debe ser la actual solucion
 
     :param S: solucion actual
     :param _S: solucion perturbada
-    :param best_S: mejor solucion
     :param i: iteracion a la que debe llegar sin cambios para aceptar una solucion perturbada que no mejore la actual
     :param itr: iteracion actual
     :return: solucion actual, mejor solucion, iteracion i sin cambios
     """ 
     # Si la solucion perturbada es mejor que la actual
     if len(S) < len(_S):
-        S = _S
+        S = _S.copy()
         
         # No se puede aceptar una solucion perturbada que sea peor a la actual por |S| iteraciones
-        # Intuitivamente, cuanto más lejos esté _S de S y best_S, menos probable es que el algoritmo establezca S = _S
+        # Intuitivamente, cuanto más lejos esté _S de S, menos probable es que el algoritmo establezca S = _S
         i = itr + len(S)
-        if len(best_S) < len(S):
-            best_S = S
             
     # Si pasaron |S| iteraciones desde que se llego a la solucion actual por medio de una perturbada mejor,
     # podemos aceptar una solucion perturbada que no sea mejor a la actual que se tenia
     elif itr == i:
-        S = _S
+        S = _S.copy()
 
-    return S, best_S, i
+    return S, i
 
 
 def MIS_ILS(G, max_iter=None):
@@ -108,37 +115,34 @@ def MIS_ILS(G, max_iter=None):
     # Solucion inicial
     S0 = MIS_heuristic(G)
 
-    # Solucion actual
+    # Mejor solucion actual
     S = set(MIS_local_search(G, S0, len(S0) - 1))
-
-    # Mejor solucion hasta el momento
-    best_S = S.copy()
-
+    
     # i es una especie de contador que nos indicara cuando podemos aceptar un
-    # resultado de la perturbacion que sea pero a la solucion actual
+    # resultado de la perturbacion que sea peor a la solucion actual
     i = 0
     
     itr = 0
+    
+    # Almacena un vertice y la ultima vez que formo parte de la solucion una vez que es forzado
+    history = {}
+    
     # El criterio de parada es un numero maximo de iteraciones definidos o, en su lugar, la cantidad de
     # arcos del grafo
     while itr < (max_iter if max_iter is not None else num_edges):
         # Elegimos un k para la perturbacion tal que si estamos en la primera iteracion
         # k = 1 siempre y, si no, con una probabilidad pequena de 1 / (2 * len(S)) elegimos un k mayor a 1.
         # La mayor parte del tiempo k == 1
-        num_left_verteces = G.subgraph(list(set(G.node_indexes()).difference(S))).num_nodes()       
-        possible_k = [1, randrange(2, num_left_verteces) if num_left_verteces > 2 else 1]
-        probability_bigger_k = 1 / (2 * len(S))
-        k = choice(possible_k, 1, p=[
-                   1 - probability_bigger_k, probability_bigger_k])
-
+        a = randrange(1, 2*len(S))
+        k = 1 if a != 1 else i + 1
         # Perturbacion de la solucion actual
-        _S = force(G, S, k)
-
+        _S = force(G, S, k, history, itr)
+        
         # Local search sobre el resultado de la perturbacion
         _S = set(MIS_local_search(G, _S, len(_S) - 1))
 
         # Definimos si el resultado de la perturbacion es aceptado como nuevo maximum independent set
-        S, best_S, i = acceptanceCondition(S, _S, best_S, i, itr)
+        S, i = acceptanceCondition(S, _S, i, itr)
         itr += 1
-    return list(best_S)
+    return list(S)
 
