@@ -74,11 +74,15 @@ def MIS_simulated_annealing(G, T0 = 10.0, max_cycles=10, max_trials = 250000, ma
             # Elegimos un vertice random del grafo
             v = choice(node_indexes)
 
-            # Si el vertice esta en la solucion actual, lo sacamos. Si no, lo incluimos.
+            # Si el vertice esta en la solucion actual, lo sacamos. Si no, lo incluimos y borramos a sus vecinos.
             if v in _S:
                 _S.remove(v)
             else:
                 _S.add(v)
+                v_neighbors = G.neighbors(v)
+                for s in S:
+                    if s in v_neighbors:
+                        _S.discard(s)
             _f = f(G, _S)
 
             # Si el resultado del ensayo por funcion de evaluacion es mejor que el que se tenia de
@@ -102,6 +106,7 @@ def MIS_simulated_annealing(G, T0 = 10.0, max_cycles=10, max_trials = 250000, ma
                         S = _S.copy()
                         best_f = _f
                         changes += 1
+            _S = S.copy()
         # Actualizamos la temperatura (nuestro cooling schedule o proceso de enfriamiento)
         T_cycle = T_cycle * alpha
         if changes < max_changes:

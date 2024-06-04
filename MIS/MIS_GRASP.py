@@ -22,7 +22,7 @@ def greedy_solution(G, S, alpha=0.1):
                     
     if (len(node_indexes) > 0):
         for node in node_indexes:
-            neighbors = list(G.neighbors(node))
+            neighbors = list(_G.neighbors(node))
             nodes.append({"index": node, "neighbors": neighbors, "degree": len(neighbors)})
 
         # Obtenemos el menor grado entre los vertices
@@ -39,6 +39,8 @@ def greedy_solution(G, S, alpha=0.1):
         # Inducimos un grafo del vertice elegido
         for u in v["neighbors"]:
             _G.remove_node(u)
+            if u in _S:
+                _S.discard(u)
         _G.remove_node(v["index"])
     return _S, _G
 

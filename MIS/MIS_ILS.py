@@ -118,6 +118,9 @@ def MIS_ILS(G, max_iter=None):
     # Mejor solucion actual
     S = set(MIS_local_search(G, S0, len(S0) - 1))
     
+    # Solucion al momento 
+    _S = S.copy()
+    
     # i es una especie de contador que nos indicara cuando podemos aceptar un
     # resultado de la perturbacion que sea peor a la solucion actual
     i = 0
@@ -134,7 +137,7 @@ def MIS_ILS(G, max_iter=None):
         # k = 1 siempre y, si no, con una probabilidad pequena de 1 / (2 * len(S)) elegimos un k mayor a 1.
         # La mayor parte del tiempo k == 1
         a = randrange(1, 2*len(S))
-        k = 1 if a != 1 else i + 1
+        k = 1 if a != 1 or itr == 0 else len(_S) + 1
         # Perturbacion de la solucion actual
         _S = force(G, S, k, history, itr)
         
