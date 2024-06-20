@@ -12,6 +12,7 @@ from .MIS_tabu_search import MIS_tabu_search
 from .MIS_simulated_annealing import MIS_simulated_annealing
 from .MIS_genetic import MIS_genetic
 from .MIS_GRASP import MIS_GRASP
+from .MIS_ACO import MIS_ACO
 
 import signal
 
@@ -188,7 +189,7 @@ def test_benchmark(time, project_part=1):
                            size_heuristic_res, size_local_search_res]
             warnings = [exact_warning, heuristic_warning, local_search_warning]
 
-        else:
+        elif (project_part == 2):
             ils_res, size_ils_res, is_mis_ils_res, ils_duration, ils_warning = timeout(
                 time, MIS_ILS, graph)
             tabu_res, size_tabu_res, is_mis_tabu_res, tabu_duration, tabu_warning = timeout(
@@ -210,14 +211,33 @@ def test_benchmark(time, project_part=1):
                            size_sa_res, size_grasp_res, size_genetic_res]
             warnings = [ils_warning, tabu_warning,
                         sa_warning, grasp_warning, genetic_warning]
+        else:
+            aco1_res, size_aco1_res, is_mis_aco1_res, aco1_duration, aco1_warning = timeout(
+                time, MIS_ACO, graph)
 
+            aco2_res, size_aco2_res, is_mis_aco2_res, aco2_duration, aco2_warning = timeout(
+                time, MIS_ACO, graph, 150)
+
+            aco3_res, size_aco3_res, is_mis_aco3_res, aco3_duration, aco3_warning = timeout(
+                time, MIS_ACO, graph, 10, 50, 0.2, 0.8, 0.3, 1)
+
+            aco4_res, size_aco4_res, is_mis_aco4_res, aco4_duration, aco4_warning = timeout(
+                time, MIS_ACO, graph, 150, 50, 0.2, 0.8, 0.3, 1)
+
+            index = ["aco1", "aco2", "aco3", "aco4"]
+            times = [aco1_duration, aco2_duration, aco3_duration, aco4_duration]
+            result = [aco1_res, aco2_res, aco3_res, aco4_res]
+            is_mis_result = [is_mis_aco1_res, is_mis_aco2_res, is_mis_aco3_res, is_mis_aco4_res]
+            result_size = [size_aco1_res, size_aco2_res, size_aco3_res, is_mis_aco4_res]
+            warnings = [aco1_warning, aco2_warning, aco3_warning, aco4_warning]
         data.append(result + result_size + is_mis_result + times + warnings)
 
         print("\n-----------------------")
 
     df = pd.DataFrame(data=data, index=indexes)
     df.columns = pd.MultiIndex.from_product([columns, index])
-    df.to_csv("res/primer_corte_res_{time}min.csv".format(time=time // 60))
+    df.to_csv("res/{project_part}_corte_res_{time}min.csv".format(
+        project_part=project_part, time=time // 60))
 
 
 def load_cubical_graph():
@@ -335,13 +355,13 @@ def test_defined_graphs(time, project_part=1):
             times = [ils_duration, tabu_duration,
                      sa_duration, grasp_duration, genetic_duration]
             result = [ils_res, tabu_res, sa_res, grasp_res, genetic_res]
-            is_mis_result = [is_mis_ils_res, is_mis_tabu_res, 
+            is_mis_result = [is_mis_ils_res, is_mis_tabu_res,
                              is_mis_sa_res, is_mis_grasp_res, is_mis_genetic_res]
-            result_size = [size_ils_res, size_tabu_res, 
+            result_size = [size_ils_res, size_tabu_res,
                            size_sa_res, size_grasp_res, size_genetic_res]
-            warnings = [ils_warning, tabu_warning, 
+            warnings = [ils_warning, tabu_warning,
                         sa_warning, grasp_warning, genetic_warning]
-        
+
         data.append(result + result_size + is_mis_result + times + warnings)
 
         print("\n-----------------------")

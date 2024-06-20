@@ -48,11 +48,11 @@ def probability(complement_Sk, v_heuristic, pheromone_trail, alpha, beta):
     return pow(pheromone_trail[v_heuristic[0]], alpha) * pow(v_heuristic[1], beta) / sum_trail_heuristic
 
 
-def update_pheromones(S, node_indexes, pheromone_trail, p, Q):
+def update_pheromones(solutions, node_indexes, pheromone_trail, p, Q):
     """
     Funcion que actualiza la feromona en cada nivel.
 
-    :param S: mejor conjunto solucion hasta el momento
+    :param solutions: soluciones encontradas por todas las hormigas
     :param node_indexes: lista de los nodos del grafo original
     :param pheromone_trail: valor de la feromona en el nivel anterior.
     :param Q: valor por el que multiplicar el tamano del conjunto actual para actualizar la feromona si el nodo esta en el conjunto.
@@ -60,12 +60,13 @@ def update_pheromones(S, node_indexes, pheromone_trail, p, Q):
     """
     for node in node_indexes:
         pheromone_trail[node] = (1 - p) * pheromone_trail[node]
+        
+        for Sk in solutions:
+            if node in Sk:
+                pheromone_trail[node] += Q * len(Sk)
 
-        if node in S:
-            pheromone_trail[node] += Q * len(S)
 
-
-def MIS_ACO(G, max_iter=10, number_of_ants=10, alpha=0.5, beta=0.5, Q=0.05, p=0.8, initial_pheromone=1.0):
+def MIS_ACO(G, max_iter=10, number_of_ants=10, alpha=0.5, beta=0.5, p=0.8, Q=0.05, initial_pheromone=1.0):
     """
     Optimizacion de colonia de hormigas para encontrar el conjunto maximo independiente de un grafo G.
 
@@ -88,6 +89,8 @@ def MIS_ACO(G, max_iter=10, number_of_ants=10, alpha=0.5, beta=0.5, Q=0.05, p=0.
 
     # Criterio de parada
     for _ in range(max_iter):
+        
+        solutions = []
 
         # Por cada hormiga
         for k in range(number_of_ants):
@@ -132,8 +135,10 @@ def MIS_ACO(G, max_iter=10, number_of_ants=10, alpha=0.5, beta=0.5, Q=0.05, p=0.
             # Si el conjunto encontrado por la hormiga es mejor al que se tenia, actualizar.
             if len(S) < len(Sk):
                 S = Sk.copy()
+                    
+            solutions.append(Sk)
             _G = G.copy()
             # Actualizar la feromona
-            update_pheromones(S, node_indexes, pheromone_trail, p, Q)
+        update_pheromones(solutions, node_indexes, pheromone_trail, p, Q)
 
     return list(S)
