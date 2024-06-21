@@ -38,7 +38,6 @@ def force(G, S, k, history, itr):
         _S.add(chosen_v)
     else:
         
-        # Seleccionamos aleatoriamente k vertices que tengan al menos un vecino en S y no esten en S
         possible_k = []
         
         for v in node_indexes:
