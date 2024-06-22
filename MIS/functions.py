@@ -13,6 +13,7 @@ from .MIS_simulated_annealing import MIS_simulated_annealing
 from .MIS_genetic import MIS_genetic
 from .MIS_GRASP import MIS_GRASP
 from .MIS_ACO import MIS_ACO
+from .MIS_memetic import MIS_memetic
 
 import signal
 
@@ -225,13 +226,13 @@ def test_benchmark(time, project_part=1):
             # result_size = [size_aco1_res, size_aco2_res]
             # warnings = [aco1_warning, aco2_warning]
             
-            memetic_res, size_memetic_res, is_mis_memetic_res, memetic_duration, memetic_warning = None
+            memetic_res, size_memetic_res, is_mis_memetic_res, memetic_duration, memetic_warning = timeout(time, MIS_memetic, graph, 75, 5, 150)
             
             index = ["memetic"]
             times = [memetic_duration]
             result = [memetic_res]
             is_mis_result = [is_mis_memetic_res]
-            result_size = [size_memetic_ress]
+            result_size = [size_memetic_res]
             warnings = [memetic_warning]
             
         data.append(result + result_size + is_mis_result + times + warnings)
