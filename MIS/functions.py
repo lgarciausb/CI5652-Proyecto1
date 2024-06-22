@@ -212,24 +212,28 @@ def test_benchmark(time, project_part=1):
             warnings = [ils_warning, tabu_warning,
                         sa_warning, grasp_warning, genetic_warning]
         else:
-            aco1_res, size_aco1_res, is_mis_aco1_res, aco1_duration, aco1_warning = timeout(
-                time, MIS_ACO, graph)
+            # aco1_res, size_aco1_res, is_mis_aco1_res, aco1_duration, aco1_warning = timeout(
+            #     time, MIS_ACO, graph)
 
-            aco2_res, size_aco2_res, is_mis_aco2_res, aco2_duration, aco2_warning = timeout(
-                time, MIS_ACO, graph, 150)
+            # aco2_res, size_aco2_res, is_mis_aco2_res, aco2_duration, aco2_warning = timeout(
+            #     time, MIS_ACO, graph, 10, 50, 0.2, 0.8, 0.3, 1)
 
-            aco3_res, size_aco3_res, is_mis_aco3_res, aco3_duration, aco3_warning = timeout(
-                time, MIS_ACO, graph, 10, 50, 0.2, 0.8, 0.3, 1)
-
-            aco4_res, size_aco4_res, is_mis_aco4_res, aco4_duration, aco4_warning = timeout(
-                time, MIS_ACO, graph, 150, 50, 0.2, 0.8, 0.3, 1)
-
-            index = ["aco1", "aco2", "aco3", "aco4"]
-            times = [aco1_duration, aco2_duration, aco3_duration, aco4_duration]
-            result = [aco1_res, aco2_res, aco3_res, aco4_res]
-            is_mis_result = [is_mis_aco1_res, is_mis_aco2_res, is_mis_aco3_res, is_mis_aco4_res]
-            result_size = [size_aco1_res, size_aco2_res, size_aco3_res, is_mis_aco4_res]
-            warnings = [aco1_warning, aco2_warning, aco3_warning, aco4_warning]
+            # index = ["aco1", "aco2"]
+            # times = [aco1_duration, aco2_duration]
+            # result = [aco1_res, aco2_res]
+            # is_mis_result = [is_mis_aco1_res, is_mis_aco2_res]
+            # result_size = [size_aco1_res, size_aco2_res]
+            # warnings = [aco1_warning, aco2_warning]
+            
+            memetic_res, size_memetic_res, is_mis_memetic_res, memetic_duration, memetic_warning = None
+            
+            index = ["memetic"]
+            times = [memetic_duration]
+            result = [memetic_res]
+            is_mis_result = [is_mis_memetic_res]
+            result_size = [size_memetic_ress]
+            warnings = [memetic_warning]
+            
         data.append(result + result_size + is_mis_result + times + warnings)
 
         print("\n-----------------------")
