@@ -14,6 +14,7 @@ from .MIS_genetic import MIS_genetic
 from .MIS_GRASP import MIS_GRASP
 from .MIS_ACO import MIS_ACO
 from .MIS_memetic import MIS_memetic
+from .MIS_memetic import MIS_scatter_search
 
 import signal
 
@@ -226,14 +227,23 @@ def test_benchmark(time, project_part=1):
             # result_size = [size_aco1_res, size_aco2_res]
             # warnings = [aco1_warning, aco2_warning]
             
-            memetic_res, size_memetic_res, is_mis_memetic_res, memetic_duration, memetic_warning = timeout(time, MIS_memetic, graph, 75, 5, 150)
+            # memetic_res, size_memetic_res, is_mis_memetic_res, memetic_duration, memetic_warning = timeout(time, MIS_memetic, graph, 75, 5, 150)
             
-            index = ["memetic"]
-            times = [memetic_duration]
-            result = [memetic_res]
-            is_mis_result = [is_mis_memetic_res]
-            result_size = [size_memetic_res]
-            warnings = [memetic_warning]
+            # index = ["memetic"]
+            # times = [memetic_duration]
+            # result = [memetic_res]
+            # is_mis_result = [is_mis_memetic_res]
+            # result_size = [size_memetic_res]
+            # warnings = [memetic_warning]
+
+            SS_res, size_SS_res, is_mis_SS_res, SS_duration, SS_warning = timeout(time, MIS_scatter_search, graph, 10, 10, 10, 100)
+            
+            index = ["SS"]
+            times = [SS_duration]
+            result = [SS_res]
+            is_mis_result = [is_mis_SS_res]
+            result_size = [size_SS_res]
+            warnings = [SS_warning]
             
         data.append(result + result_size + is_mis_result + times + warnings)
 
