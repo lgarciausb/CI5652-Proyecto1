@@ -247,8 +247,7 @@ def MIS_scatter_search(G, ref_set_size, mutation_rate, relinking_rate, max_no_im
             rl = relink(G, *P)
             relinks += rl
         relinks.sort(key=lambda p: p[1])
-        pop = refSet + children + relinks[-relinking_pop:]   
-
+        pop = refSet + children + relinks[-relinking_pop:]  
 
     return [i for i in range(len(best[0])) if best[0][i] == True]
 

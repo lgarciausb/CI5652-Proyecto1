@@ -1,0 +1,6 @@
+,Result,Result,Result,Result,Size Result,Size Result,Size Result,Size Result,Is MIS,Is MIS,Is MIS,Is MIS,Time,Time,Time,Time,Warnings,Warnings,Warnings,Warnings
+,memetic,SS,aco1,aco2,memetic,SS,aco1,aco2,memetic,SS,aco1,aco2,memetic,SS,aco1,aco2,memetic,SS,aco1,aco2
+CUBICAL n=8 e=12,"[1, 3, 4, 6]","[0, 2, 5, 7]","[1, 3, 4, 6]","[0, 2, 5, 7]",4,4,4,4,True,True,True,True,0.1367325782775879,0.2629969120025635,0.00922846794128418,0.025420427322387695,,,,
+K3 n=6 e=7,"[0, 2, 5]","[0, 2, 4]","[0, 2, 3]","[0, 2, 4]",3,3,3,3,True,True,True,True,0.10835433006286621,0.20445036888122559,0.0031278133392333984,0.014640331268310547,,,,
+P3 n=3 e=2,"[0, 2]","[0, 2]","[0, 2]","[0, 2]",2,2,2,2,True,True,True,True,0.06697440147399902,0.13272976875305176,0.0013267993927001953,0.0056591033935546875,,,,
+SQUARE_TRIANGLE n=6 e=7,"[0, 3, 4]","[0, 2, 5]","[0, 2, 5]","[0, 2, 5]",3,3,3,3,True,True,True,True,0.11062383651733398,0.2108747959136963,0.003683328628540039,0.015017509460449219,,,,

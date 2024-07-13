@@ -154,7 +154,7 @@ def test_benchmark(time, project_part=1):
 
     :param time: tiempo maximo para ejecutar una funcion
     """
-    dirname = "benchmark"
+    dirname = "benchmark/rerunss"
     filenames = next(walk(dirname), (None, None, []))[2]
 
     print("---------TESTS---------")
@@ -175,21 +175,21 @@ def test_benchmark(time, project_part=1):
             filename=filename, n=graph.num_nodes(), e=graph.num_edges()))
 
         if (project_part == 1):
-            exact_res, size_exact_res, is_mis_exact_res, exact_duration, exact_warning = timeout(
-                time, MIS_exact, graph)
+            # exact_res, size_exact_res, is_mis_exact_res, exact_duration, exact_warning = timeout(
+            #     time, MIS_exact, graph)
             heuristic_res, size_heuristic_res, is_mis_heuristic_res, heuristic_duration, heuristic_warning = timeout(
                 time, MIS_heuristic, graph)
             local_search_res, size_local_search_res, is_mis_local_search_res, local_search_duration, local_search_warning = timeout(
                 time, MIS_local_search, graph, heuristic_res, len(heuristic_res) - 1)
 
-            index = ["exact", "heuristic", "local search"]
-            times = [exact_duration, heuristic_duration, local_search_duration]
-            result = [exact_res, heuristic_res, local_search_res]
-            is_mis_result = [is_mis_exact_res,
-                             is_mis_heuristic_res, is_mis_local_search_res]
-            result_size = [size_exact_res,
-                           size_heuristic_res, size_local_search_res]
-            warnings = [exact_warning, heuristic_warning, local_search_warning]
+            # index = ["exact", "heuristic", "local search"]
+            # times = [exact_duration, heuristic_duration, local_search_duration]
+            # result = [exact_res, heuristic_res, local_search_res]
+            # is_mis_result = [is_mis_exact_res,
+            #                  is_mis_heuristic_res, is_mis_local_search_res]
+            # result_size = [size_exact_res,
+            #                size_heuristic_res, size_local_search_res]
+            # warnings = [exact_warning, heuristic_warning, local_search_warning]
 
         elif (project_part == 2):
             ils_res, size_ils_res, is_mis_ils_res, ils_duration, ils_warning = timeout(
@@ -219,33 +219,19 @@ def test_benchmark(time, project_part=1):
 
             # aco2_res, size_aco2_res, is_mis_aco2_res, aco2_duration, aco2_warning = timeout(
             #     time, MIS_ACO, graph, 10, 50, 0.2, 0.8, 0.3, 1)
-
-            # index = ["aco1", "aco2"]
-            # times = [aco1_duration, aco2_duration]
-            # result = [aco1_res, aco2_res]
-            # is_mis_result = [is_mis_aco1_res, is_mis_aco2_res]
-            # result_size = [size_aco1_res, size_aco2_res]
-            # warnings = [aco1_warning, aco2_warning]
             
             # memetic_res, size_memetic_res, is_mis_memetic_res, memetic_duration, memetic_warning = timeout(time, MIS_memetic, graph, 75, 5, 150)
-            
-            # index = ["memetic"]
-            # times = [memetic_duration]
-            # result = [memetic_res]
-            # is_mis_result = [is_mis_memetic_res]
-            # result_size = [size_memetic_res]
-            # warnings = [memetic_warning]
 
             SS_res, size_SS_res, is_mis_SS_res, SS_duration, SS_warning = timeout(time, MIS_scatter_search, graph, 10, 10, 10, 100)
             
-            index = ["SS"]
-            times = [SS_duration]
-            result = [SS_res]
-            is_mis_result = [is_mis_SS_res]
-            result_size = [size_SS_res]
-            warnings = [SS_warning]
+            # index = ["memetic", "SS", "aco1", "aco2"]
+            # times = [memetic_duration, SS_duration, aco1_duration, aco2_duration]
+            # result = [memetic_res, SS_res, aco1_res, aco2_res]
+            # is_mis_result = [is_mis_memetic_res, is_mis_SS_res, is_mis_aco1_res, is_mis_aco2_res]
+            # result_size = [size_memetic_res, size_SS_res, size_aco1_res, size_aco2_res]
+            # warnings = [memetic_warning, SS_warning, aco1_warning, aco2_warning]
             
-        data.append(result + result_size + is_mis_result + times + warnings)
+        # data.append(result + result_size + is_mis_result + times + warnings)
 
         print("\n-----------------------")
 
@@ -354,7 +340,7 @@ def test_defined_graphs(time, project_part=1):
                            size_heuristic_res, size_local_search_res]
             warnings = [exact_warning, heuristic_warning, local_search_warning]
 
-        else:
+        if (project_part == 2):
             ils_res, size_ils_res, is_mis_ils_res, ils_duration, ils_warning = timeout(
                 time, MIS_ILS, graph)
             tabu_res, size_tabu_res, is_mis_tabu_res, tabu_duration, tabu_warning = timeout(
@@ -376,7 +362,30 @@ def test_defined_graphs(time, project_part=1):
                            size_sa_res, size_grasp_res, size_genetic_res]
             warnings = [ils_warning, tabu_warning,
                         sa_warning, grasp_warning, genetic_warning]
+            
+        else:
+            
+            aco1_res, size_aco1_res, is_mis_aco1_res, aco1_duration, aco1_warning = timeout(
+                time, MIS_ACO, graph)
+
+            aco2_res, size_aco2_res, is_mis_aco2_res, aco2_duration, aco2_warning = timeout(
+                time, MIS_ACO, graph, 10, 50, 0.2, 0.8, 0.3, 1)
+            
+            memetic_res, size_memetic_res, is_mis_memetic_res, memetic_duration, memetic_warning = timeout(time, MIS_memetic, graph, 75, 5, 150)
+
+            SS_res, size_SS_res, is_mis_SS_res, SS_duration, SS_warning = timeout(time, MIS_scatter_search, graph, 10, 10, 10, 100)
+            
+            index = ["memetic", "SS", "aco1", "aco2"]
+            times = [memetic_duration, SS_duration, aco1_duration, aco2_duration]
+            result = [memetic_res, SS_res, aco1_res, aco2_res]
+            is_mis_result = [is_mis_memetic_res, is_mis_SS_res, is_mis_aco1_res, is_mis_aco2_res]
+            result_size = [size_memetic_res, size_SS_res, size_aco1_res, size_aco2_res]
+            warnings = [memetic_warning, SS_warning, aco1_warning, aco2_warning]
 
         data.append(result + result_size + is_mis_result + times + warnings)
 
         print("\n-----------------------")
+    df = pd.DataFrame(data=data, index=indexes)
+    df.columns = pd.MultiIndex.from_product([columns, index])
+    df.to_csv("res/{project_part}_corte_res_{time}min_grafos_definidos.csv".format(
+        project_part=project_part, time=time // 60))
