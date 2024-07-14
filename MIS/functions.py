@@ -15,6 +15,7 @@ from .MIS_GRASP import MIS_GRASP
 from .MIS_ACO import MIS_ACO
 from .MIS_memetic import MIS_memetic
 from .MIS_memetic import MIS_scatter_search
+from .MIS_wizard_search import MIS_wizard_search_material_pouch
 
 import signal
 
@@ -363,7 +364,7 @@ def test_defined_graphs(time, project_part=1):
             warnings = [ils_warning, tabu_warning,
                         sa_warning, grasp_warning, genetic_warning]
             
-        else:
+        if (project_part == 3):
             
             aco1_res, size_aco1_res, is_mis_aco1_res, aco1_duration, aco1_warning = timeout(
                 time, MIS_ACO, graph)
@@ -381,6 +382,18 @@ def test_defined_graphs(time, project_part=1):
             is_mis_result = [is_mis_memetic_res, is_mis_SS_res, is_mis_aco1_res, is_mis_aco2_res]
             result_size = [size_memetic_res, size_SS_res, size_aco1_res, size_aco2_res]
             warnings = [memetic_warning, SS_warning, aco1_warning, aco2_warning]
+            
+        else:
+
+            wizard_mp_res, size_wizard_mp_res, is_mis_wizard_mp_res, wizard_mp_duration, wizard_mp_warning = timeout(
+                time, MIS_wizard_search_material_pouch, graph, 100, 10, 80, 10, 10, 150)
+
+            index = ["wizard_material_pouch"]
+            times = [memetic_duration, SS_duration, wizard_mp_duration, aco2_duration]
+            result = [memetic_res, SS_res, wizard_mp_res, aco2_res]
+            is_mis_result = [is_mis_memetic_res, is_mis_SS_res, is_mis_wizard_mp_res, is_mis_aco2_res]
+            result_size = [size_memetic_res, size_SS_res, size_wizard_mp_res, size_aco2_res]
+            warnings = [memetic_warning, SS_warning, wizard_mp_warning, aco2_warning]
 
         data.append(result + result_size + is_mis_result + times + warnings)
 
