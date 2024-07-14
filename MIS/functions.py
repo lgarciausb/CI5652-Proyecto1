@@ -155,7 +155,7 @@ def test_benchmark(time, project_part=1):
 
     :param time: tiempo maximo para ejecutar una funcion
     """
-    dirname = "benchmark/rerunss"
+    dirname = "benchmark"
     filenames = next(walk(dirname), (None, None, []))[2]
 
     print("---------TESTS---------")
@@ -163,9 +163,7 @@ def test_benchmark(time, project_part=1):
     data = []
     indexes = []
     columns = ["Result", "Size Result", "Is MIS", "Time", "Warnings"]
-
     for filename in filenames:
-
         graph = load_graph(
             "{dirname}/{filename}".format(dirname=dirname, filename=filename))
 
@@ -214,7 +212,7 @@ def test_benchmark(time, project_part=1):
                            size_sa_res, size_grasp_res, size_genetic_res]
             warnings = [ils_warning, tabu_warning,
                         sa_warning, grasp_warning, genetic_warning]
-        else:
+        elif (project_part == 3):
             # aco1_res, size_aco1_res, is_mis_aco1_res, aco1_duration, aco1_warning = timeout(
             #     time, MIS_ACO, graph)
 
@@ -232,10 +230,20 @@ def test_benchmark(time, project_part=1):
             # result_size = [size_memetic_res, size_SS_res, size_aco1_res, size_aco2_res]
             # warnings = [memetic_warning, SS_warning, aco1_warning, aco2_warning]
             
-        # data.append(result + result_size + is_mis_result + times + warnings)
+        # 
+        else: 
+            wizard_mp_res, size_wizard_mp_res, is_mis_wizard_mp_res, wizard_mp_duration, wizard_mp_warning = timeout(
+                time, MIS_wizard_search_material_pouch, graph, 100, 10, 80, 10, 10, 150)
+
+            index = ["wizard_material_pouch"]
+            times = [wizard_mp_duration]
+            result = [wizard_mp_res]
+            is_mis_result = [is_mis_wizard_mp_res]
+            result_size = [size_wizard_mp_res]
+            warnings = [wizard_mp_warning]
 
         print("\n-----------------------")
-
+    data.append(result + result_size + is_mis_result + times + warnings)
     df = pd.DataFrame(data=data, index=indexes)
     df.columns = pd.MultiIndex.from_product([columns, index])
     df.to_csv("res/{project_part}_corte_res_{time}min.csv".format(
@@ -383,17 +391,7 @@ def test_defined_graphs(time, project_part=1):
             result_size = [size_memetic_res, size_SS_res, size_aco1_res, size_aco2_res]
             warnings = [memetic_warning, SS_warning, aco1_warning, aco2_warning]
             
-        else:
 
-            wizard_mp_res, size_wizard_mp_res, is_mis_wizard_mp_res, wizard_mp_duration, wizard_mp_warning = timeout(
-                time, MIS_wizard_search_material_pouch, graph, 100, 10, 80, 10, 10, 150)
-
-            index = ["wizard_material_pouch"]
-            times = [memetic_duration, SS_duration, wizard_mp_duration, aco2_duration]
-            result = [memetic_res, SS_res, wizard_mp_res, aco2_res]
-            is_mis_result = [is_mis_memetic_res, is_mis_SS_res, is_mis_wizard_mp_res, is_mis_aco2_res]
-            result_size = [size_memetic_res, size_SS_res, size_wizard_mp_res, size_aco2_res]
-            warnings = [memetic_warning, SS_warning, wizard_mp_warning, aco2_warning]
 
         data.append(result + result_size + is_mis_result + times + warnings)
 

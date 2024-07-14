@@ -5,7 +5,7 @@ from math import inf
 import json
 import time
 
-from MIS_heuristic import MIS_heuristic2
+from .MIS_heuristic import MIS_heuristic2
 
 
 def fitness(G, S):
